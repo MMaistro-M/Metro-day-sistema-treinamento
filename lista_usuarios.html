@@ -19,7 +19,8 @@
         </header>
         <main class="main-content">
             <!-- Página da Lista de Usuários (apenas para Administradores) -->
-            <div id="adminUsuariosLista" class="page active" aria-hidden="false"> <!-- mudar pra class="page" e aria-hidden="true" depois -->
+            <div id="adminUsuariosLista" class="page active" aria-hidden="false">
+                <!-- mudar pra class="page" e aria-hidden="true" depois -->
                 <h2><i class="fas fa-users-cog"></i> Lista de Usuários Registrados</h2>
                 <div class="filters">
                     <div class="filter-group">
@@ -35,6 +36,53 @@
                     <div class="filter-group">
                         <label for="buscaUsuario">Buscar por nome:</label>
                         <input type="text" id="buscaUsuario" placeholder="Digite o nome...">
+                    </div>
+                </div>
+                <!-- Botão de adicionar novo usuário -->
+                <div style="margin-top: 10px;">
+                    <button id="btnAdicionarUsuario" class="btn-success">
+                        <i class="fas fa-user-plus"></i> Adicionar +
+                    </button>
+                </div>
+                <!-- Box de cadastro de novo usuário -->
+                <div id="cadastroBox" class="modal">
+                    <div class="modal-content">
+                        <h3><i class="fas fa-user-plus"></i> Preencha o novo cadastro</h3>
+                        <div class="form-group">
+                            <label for="novoNome">Nome:</label>
+                            <input type="text" id="novoNome" placeholder="Digite o nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novoEmail">E-mail:</label>
+                            <input type="email" id="novoEmail" placeholder="Digite o e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novoCPF">CPF:</label>
+                            <input type="text" id="novoCPF" placeholder="Digite o CPF" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novaFuncao">Função no sistema:</label>
+                            <select id="novaFuncao" required>
+                                <option value="">Selecione</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="instrutor">Instrutor</option>
+                                <option value="monitor">Monitor</option>
+                                <option value="aluno">Aluno</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="novoCargo">Cargo:</label>
+                            <input type="text" id="novoCargo" placeholder="Digite o cargo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novoDepartamento">Departamento:</label>
+                            <input type="text" id="novoDepartamento" placeholder="Digite o departamento" required>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                            <button onclick="fecharCadastroBox()"><i class="fas fa-times"></i> Cancelar</button>
+                            <button id="salvarNovoUsuario" class="btn-success"><i class="fas fa-save"></i>
+                                Salvar</button>
+                        </div>
                     </div>
                 </div>
                 <table id="tabelaUsuarios">
@@ -62,7 +110,7 @@
                         <div class="form-group">
                             <label for="editEmail">E-mail:</label>
                             <input type="email" id="editEmail">
-                        </div> 
+                        </div>
                         <div class="form-group">
                             <label for="editCPF">CPF:</label>
                             <input type="text" id="editCPF" readonly>

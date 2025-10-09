@@ -91,6 +91,57 @@ function debounce(fn, wait = 250) {
   };
 }
 
+// ====================== CADASTRO DE NOVO USUÁRIO ======================
+function abrirCadastroBox() {
+  const box = document.getElementById("cadastroBox");
+  box.style.display = "block";
+
+  // limpa os campos sempre que abrir
+  document.getElementById("novoNome").value = "";
+  document.getElementById("novoEmail").value = "";
+  document.getElementById("novoCPF").value = "";
+  document.getElementById("novaFuncao").value = "";
+  document.getElementById("novoCargo").value = "";
+  document.getElementById("novoDepartamento").value = "";
+}
+
+function fecharCadastroBox() {
+  document.getElementById("cadastroBox").style.display = "none";
+}
+
+function salvarNovoCadastro() {
+  const nome = document.getElementById("novoNome").value.trim();
+  const email = document.getElementById("novoEmail").value.trim();
+  const cpf = document.getElementById("novoCPF").value.trim();
+  const funcao = document.getElementById("novaFuncao").value;
+  const cargo = document.getElementById("novoCargo").value.trim();
+  const departamento = document.getElementById("novoDepartamento").value.trim();
+
+  if (!nome || !email || !cpf || !funcao || !cargo || !departamento) {
+    alert("Preencha todos os campos antes de salvar.");
+    return;
+  }
+
+  // Verifica se o CPF já existe
+  if (usuarios.some(u => u.cpf === cpf)) {
+    alert("Já existe um usuário com este CPF.");
+    return;
+  }
+
+  usuarios.push({ nome, email, cpf, funcao, cargo, departamento });
+  renderTabelaUsuarios();
+  fecharCadastroBox();
+}
+
+// Eventos do botão
+document.addEventListener("DOMContentLoaded", () => {
+  const btnAdd = document.getElementById("btnAdicionarUsuario");
+  const btnSalvarNovo = document.getElementById("salvarNovoUsuario");
+
+  if (btnAdd) btnAdd.addEventListener("click", abrirCadastroBox);
+  if (btnSalvarNovo) btnSalvarNovo.addEventListener("click", salvarNovoCadastro);
+});
+
 // ====================== EVENTOS INICIAIS ======================
 document.addEventListener("DOMContentLoaded", () => {
   renderTabelaUsuarios();
