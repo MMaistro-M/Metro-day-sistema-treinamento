@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-subway"></i>
+                Metrô SP - Administrador do Sistema
+            </div>
+        </header>
+        <main class="main-content">
+            <!-- Página da Lista de Usuários (apenas para Administradores) -->
+            <div id="adminUsuariosLista" class="page active" aria-hidden="false"> <!-- mudar pra class="page" e aria-hidden="true" depois -->
+                <h2><i class="fas fa-users-cog"></i> Lista de Usuários Registrados</h2>
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="filtroFuncaoUsuario">Filtrar por função:</label>
+                        <select name="" id="filtroFuncaoUsuario">
+                            <option value="">Todos</option>
+                            <option value="administrador">Administradores do sistema</option>
+                            <option value="instrutor">Instrutores</option>
+                            <option value="monitor">Monitores</option>
+                            <option value="aluno">Alunos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="buscaUsuario">Buscar por nome:</label>
+                        <input type="text" id="buscaUsuario" placeholder="Digite o nome...">
+                    </div>
+                </div>
+                <table id="tabelaUsuarios">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>CPF</th>
+                            <th>Função no sistema</th>
+                            <th>Cargo</th>
+                            <th>Departamento</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuariosBody">
+                    </tbody>
+                </table>
+                <!-- Modal de edição -->
+                <div id="editModal" class="modal">
+                    <div class="modal-content">
+                        <h3><i class="fas fa-user-edit"></i> Editar Usuário</h3>
+                        <div class="form-group">
+                            <label for="editNome">Nome:</label>
+                            <input type="text" id="editNome">
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">E-mail:</label>
+                            <input type="email" id="editEmail">
+                        </div> 
+                        <div class="form-group">
+                            <label for="editCPF">CPF:</label>
+                            <input type="text" id="editCPF" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFuncao">Função no sistema:</label>
+                            <select id="editFuncao">
+                                <option value="administrador">Administrador do sistema</option>
+                                <option value="instrutor">Instrutor</option>
+                                <option value="monitor">Monitor</option>
+                                <option value="aluno">Aluno</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCargo">Cargo:</label>
+                            <input type="text" id="editCargo">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDepartamento">Departamento:</label>
+                            <input type="text" id="editDepartamento">
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                            <button onclick="fecharModal()"><i class="fas fa-times"></i> Cancelar</button>
+                            <button id="saveEditBtn"><i class="fas fa-save"></i> Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- <script src="script.js"></script> -->
+    <script src="admin_usuarios_lista.js"></script>
+</body>
+
+</html>
