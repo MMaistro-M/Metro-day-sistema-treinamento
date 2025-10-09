@@ -271,23 +271,32 @@
                 </div>
             </div>
             
-            <!-- Página de Registro de Presença -->
+            <!-- Página de Registro de Presença ATUALIZADA -->
             <div id="adminPresenca" class="page" aria-hidden="true">
                 <h2><i class="fas fa-clipboard-list"></i> Registro de Presença</h2>
                 
-                <div class="form-group">
-                    <label for="selectTurma">Selecionar Turma:</label>
-                    <select id="selectTurma">
-                        <option value="">Selecione uma turma</option>
-                        <option value="nr35-0823">NR35-TURMA-0823</option>
-                        <option value="nr10-0723">NR10-TURMA-0723</option>
-                        <option value="lideranca-0823">LID-TURMA-0823</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="dataAula">Data da Aula:</label>
-                    <input type="date" id="dataAula">
+                <div class="registro-presenca-header">
+                    <div>
+                        <div class="form-group">
+                            <label for="selectTurma">Selecionar Turma:</label>
+                            <select id="selectTurma">
+                                <option value="">Selecione uma turma</option>
+                                <option value="nr35-0823">NR35-TURMA-0823</option>
+                                <option value="nr10-0723">NR10-TURMA-0723</option>
+                                <option value="lideranca-0823">LID-TURMA-0823</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dataAula">Data da Aula:</label>
+                            <input type="date" id="dataAula">
+                        </div>
+                    </div>
+                    
+                    <div class="registro-actions">
+                        <button onclick="inicializarRegistroPresenca()"><i class="fas fa-sync-alt"></i> Carregar Alunos</button>
+                        <button onclick="gerarRelatorioPresenca()"><i class="fas fa-chart-bar"></i> Gerar Relatório</button>
+                    </div>
                 </div>
                 
                 <h3 style="margin-top: 1.5rem;"><i class="fas fa-users"></i> Lista de Alunos</h3>
@@ -302,36 +311,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>123456</td>
-                            <td>João Silva</td>
-                            <td>123.456.789-00</td>
-                            <td><input type="checkbox" class="checkbox-presenca"></td>
-                            <td><button class="btn-assinar"><i class="fas fa-signature"></i> Assinar</button></td>
-                        </tr>
-                        <tr>
-                            <td>234567</td>
-                            <td>Maria Santos</td>
-                            <td>234.567.890-11</td>
-                            <td><input type="checkbox" class="checkbox-presenca"></td>
-                            <td><button class="btn-assinar"><i class="fas fa-signature"></i> Assinar</button></td>
-                        </tr>
-                        <tr>
-                            <td>345678</td>
-                            <td>Pedro Costa</td>
-                            <td>345.678.901-22</td>
-                            <td><input type="checkbox" class="checkbox-presenca"></td>
-                            <td><button class="btn-assinar"><i class="fas fa-signature"></i> Assinar</button></td>
-                        </tr>
+                        <!-- Os alunos serão carregados dinamicamente via JavaScript -->
                     </tbody>
                 </table>
                 
-                <div style="margin-top: 1.5rem;">
-                    <button onclick="salvarPresenca()"><i class="fas fa-save"></i> Salvar Registro de Presença</button>
-                </div>
-                
                 <div class="signature-pad-container" style="display: none; margin-top: 2rem;">
                     <h3><i class="fas fa-signature"></i> Assinatura Digital</h3>
+                    
+                    <div class="aluno-info-assinatura">
+                        <p>Aluno: <span id="alunoAssinaturaNome">-</span></p>
+                        <p>CPF: <span id="alunoAssinaturaCPF">-</span></p>
+                    </div>
+                    
                     <p>Assine no campo abaixo utilizando o mouse ou touchscreen:</p>
                     
                     <canvas id="signature-pad" class="signature-pad" width="600" height="200"></canvas>
@@ -341,6 +332,11 @@
                         <button onclick="salvarAssinatura()"><i class="fas fa-check"></i> Confirmar Assinatura</button>
                         <button class="btn-danger" onclick="cancelarAssinatura()"><i class="fas fa-times"></i> Cancelar</button>
                     </div>
+                </div>
+                
+                <div class="relatorio-presenca">
+                    <h3><i class="fas fa-chart-pie"></i> Estatísticas de Presença</h3>
+                    <p>Para visualizar o relatório completo de presenças e faltas, selecione uma turma e clique em "Gerar Relatório".</p>
                 </div>
             </div>
         </main>
@@ -353,4 +349,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

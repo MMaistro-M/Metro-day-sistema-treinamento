@@ -1,454 +1,605 @@
 :root {
-            --azul-escuro: #003366;
-            --azul-medio: #00509E;
-            --azul-claro: #0077CC;
-            --azul-brilhante: #0099FF;
-            --vermelho-metro: #CC0000;
-            --cinza-escuro-metro: #333333;
-            --branco: #FFFFFF;
-            --cinza-claro: #F5F5F5;
-            --cinza: #DDDDDD;
-            --cinza-escuro: #777777;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-escuro) 100%);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            background-color: var(--branco);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        header {
-            background: linear-gradient(90deg, var(--azul-escuro) 0%, var(--vermelho-metro) 100%);
-            color: var(--branco);
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-            color: var(--azul-brilhante);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-        
-        nav ul li a {
-            color: var(--branco);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        nav ul li a i {
-            margin-right: 8px;
-        }
-        
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .main-content {
-            padding: 2rem;
-            min-height: 600px;
-        }
-        
-        .page {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        h2 {
-            color: var(--azul-escuro);
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--vermelho-metro);
-            padding-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        h2 i {
-            margin-right: 10px;
-            color: var(--vermelho-metro);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--azul-escuro);
-        }
-        
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--cinza);
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        input[type="text"]:focus,
-        input[type="password"]:focus,
-        input[type="email"]:focus,
-        input[type="number"]:focus,
-        select:focus,
-        textarea:focus {
-            border-color: var(--azul-claro);
-            outline: none;
-        }
-        
-        button {
-            background-color: var(--azul-medio);
-            color: var(--branco);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        button i {
-            margin-right: 8px;
-        }
-        
-        button:hover {
-            background-color: var(--azul-escuro);
-        }
-        
-        button.btn-danger {
-            background-color: var(--vermelho-metro);
-        }
-        
-        button.btn-danger:hover {
-            background-color: #AA0000;
-        }
-        
-        .card {
-            border: 1px solid var(--cinza);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background-color: var(--branco);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card h3 {
-            color: var(--azul-medio);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .card h3 i {
-            margin-right: 10px;
-        }
-        
-        .card p {
-            margin-bottom: 1rem;
-            color: var(--cinza-escuro);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        table th,
-        table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--cinza);
-        }
-        
-        table th {
-            background-color: var(--azul-claro);
-            color: var(--branco);
-        }
-        
-        table tr:nth-child(even) {
-            background-color: var(--cinza-claro);
-        }
-        
-        .admin-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--azul-escuro);
-            color: var(--branco);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-            z-index: 100;
-        }
-        
-        .admin-link:hover {
-            transform: scale(1.1);
-        }
-        
-        .checkbox-presenca {
-            transform: scale(1.5);
-            cursor: pointer;
-        }
-        
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: var(--branco);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .user-type-selector {
-            display: flex;
-            margin-bottom: 1.5rem;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid var(--azul-claro);
-        }
-        
-        .user-type {
-            flex: 1;
-            padding: 0.75rem;
-            text-align: center;
-            background-color: var(--cinza-claro);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .user-type.active {
-            background-color: var(--azul-claro);
-            color: var(--branco);
-            font-weight: 600;
-        }
-        
-        .curso-detalhes {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background-color: var(--cinza-claro);
-            border-radius: 8px;
-            border-left: 4px solid var(--azul-medio);
-        }
-        
-        .aluno-dashboard {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-        }
-        
-        .admin-dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        
-        .aluno-info, .admin-panel {
-            background-color: var(--cinza-claro);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-        
-        .aluno-cursos, .admin-content {
-            background-color: var(--branco);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--cinza);
-        }
-        
-        .progress-bar {
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            height: 20px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-        
-        .progress {
-            background-color: var(--azul-medio);
-            height: 100%;
-            border-radius: 5px;
-        }
-        
-        .signature-pad {
-            border: 1px solid var(--cinza);
-            border-radius: 4px;
-            margin: 15px 0;
-            background-color: var(--branco);
-        }
-        
-        .signature-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .certificado {
-            border: 2px solid var(--azul-escuro);
-            padding: 2rem;
-            margin: 1rem 0;
-            background-color: var(--branco);
-            position: relative;
-        }
-        
-        .certificado h3 {
-            text-align: center;
-            color: var(--azul-escuro);
-            margin-bottom: 1.5rem;
-        }
-        
-        .certificado-content {
-            text-align: center;
-        }
-        
-        .certificado-footer {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 3rem;
-        }
-        
-        .assinatura {
-            text-align: center;
-            border-top: 1px solid var(--cinza-escuro);
-            padding-top: 0.5rem;
-            width: 200px;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        
-        .badge-success {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        .badge-warning {
-            background-color: #ffc107;
-            color: black;
-        }
-        
-        .badge-info {
-            background-color: var(--azul-claro);
-            color: white;
-        }
-        
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        @media (max-width: 992px) {
-            .aluno-dashboard, .admin-dashboard {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-            
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 1rem;
-            }
-            
-            .filters {
-                flex-direction: column;
-            }
-        }
+    --azul-escuro: #003366;
+    --azul-medio: #00509E;
+    --azul-claro: #0077CC;
+    --azul-brilhante: #0099FF;
+    --vermelho-metro: #CC0000;
+    --cinza-escuro-metro: #333333;
+    --branco: #FFFFFF;
+    --cinza-claro: #F5F5F5;
+    --cinza: #DDDDDD;
+    --cinza-escuro: #777777;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-escuro) 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    background: linear-gradient(90deg, var(--azul-escuro) 0%, var(--vermelho-metro) 100%);
+    color: var(--branco);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
+    color: var(--azul-brilhante);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    color: var(--branco);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a i {
+    margin-right: 8px;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+    padding: 2rem;
+    min-height: 600px;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.active {
+    display: block;
+}
+
+h2 {
+    color: var(--azul-escuro);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--vermelho-metro);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+h2 i {
+    margin-right: 10px;
+    color: var(--vermelho-metro);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--azul-escuro);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--cinza);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--azul-claro);
+    outline: none;
+}
+
+button {
+    background-color: var(--azul-medio);
+    color: var(--branco);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button i {
+    margin-right: 8px;
+}
+
+button:hover {
+    background-color: var(--azul-escuro);
+}
+
+button.btn-danger {
+    background-color: var(--vermelho-metro);
+}
+
+button.btn-danger:hover {
+    background-color: #AA0000;
+}
+
+.card {
+    border: 1px solid var(--cinza);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--branco);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: var(--azul-medio);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.card h3 i {
+    margin-right: 10px;
+}
+
+.card p {
+    margin-bottom: 1rem;
+    color: var(--cinza-escuro);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cinza);
+}
+
+table th {
+    background-color: var(--azul-claro);
+    color: var(--branco);
+}
+
+table tr:nth-child(even) {
+    background-color: var(--cinza-claro);
+}
+
+.admin-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    z-index: 100;
+}
+
+.admin-link:hover {
+    transform: scale(1.1);
+}
+
+.checkbox-presenca {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--branco);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.user-type-selector {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--azul-claro);
+}
+
+.user-type {
+    flex: 1;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: var(--cinza-claro);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-type.active {
+    background-color: var(--azul-claro);
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.curso-detalhes {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+    border-left: 4px solid var(--azul-medio);
+}
+
+.aluno-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.aluno-info, .admin-panel {
+    background-color: var(--cinza-claro);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.aluno-cursos, .admin-content {
+    background-color: var(--branco);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--cinza);
+}
+
+.progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 20px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress {
+    background-color: var(--azul-medio);
+    height: 100%;
+    border-radius: 5px;
+}
+
+.signature-pad {
+    border: 1px solid var(--cinza);
+    border-radius: 4px;
+    margin: 15px 0;
+    background-color: var(--branco);
+}
+
+.signature-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.certificado {
+    border: 2px solid var(--azul-escuro);
+    padding: 2rem;
+    margin: 1rem 0;
+    background-color: var(--branco);
+    position: relative;
+}
+
+.certificado h3 {
+    text-align: center;
+    color: var(--azul-escuro);
+    margin-bottom: 1.5rem;
+}
+
+.certificado-content {
+    text-align: center;
+}
+
+.certificado-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+}
+
+.assinatura {
+    text-align: center;
+    border-top: 1px solid var(--cinza-escuro);
+    padding-top: 0.5rem;
+    width: 200px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.badge-info {
+    background-color: var(--azul-claro);
+    color: white;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* NOVOS ESTILOS PARA REGISTRO DE PRESENÇA */
+.registro-presenca-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.registro-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.aluno-info-assinatura {
+    background-color: var(--cinza-claro);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--azul-medio);
+}
+
+.aluno-info-assinatura p {
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: var(--azul-escuro);
+}
+
+.relatorio-presenca {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+    border: 1px solid var(--cinza);
+}
+
+.relatorio-presenca h3 {
+    margin-bottom: 1rem;
+    color: var(--azul-escuro);
+    display: flex;
+    align-items: center;
+}
+
+.relatorio-presenca h3 i {
+    margin-right: 10px;
+    color: var(--vermelho-metro);
+}
+
+.relatorio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: var(--branco);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.relatorio-table th,
+.relatorio-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cinza);
+}
+
+.relatorio-table th {
+    background-color: var(--azul-medio);
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.relatorio-table tr:nth-child(even) {
+    background-color: var(--cinza-claro);
+}
+
+.relatorio-table tr:hover {
+    background-color: #e8f4ff;
+}
+
+.percentual-baixo {
+    color: var(--vermelho-metro);
+    font-weight: bold;
+}
+
+.percentual-medio {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.percentual-alto {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Estilos para responsividade do registro de presença */
+@media (max-width: 992px) {
+    .aluno-dashboard, .admin-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .registro-presenca-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .registro-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo {
+        margin-bottom: 1rem;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+    
+    .registro-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .registro-actions button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .relatorio-table {
+        font-size: 0.8rem;
+    }
+    
+    .relatorio-table th,
+    .relatorio-table td {
+        padding: 0.5rem;
+    }
+    
+    .signature-pad {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .relatorio-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .registro-presenca-header {
+        gap: 10px;
+    }
+    
+    .aluno-info-assinatura {
+        padding: 0.75rem;
+    }
+}
