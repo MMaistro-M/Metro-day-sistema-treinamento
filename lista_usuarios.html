@@ -50,15 +50,19 @@
                         <h3><i class="fas fa-user-plus"></i> Preencha o novo cadastro</h3>
                         <div class="form-group">
                             <label for="novoNome">Nome:</label>
-                            <input type="text" id="novoNome" placeholder="Digite o nome completo" required>
+                            <input type="text" id="novoNome" placeholder="Digite o nome completo..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoEmail">E-mail:</label>
-                            <input type="email" id="novoEmail" placeholder="Digite o e-mail" required>
+                            <input type="email" id="novoEmail" placeholder="Digite o e-mail..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoCPF">CPF:</label>
-                            <input type="text" id="novoCPF" placeholder="Digite o CPF" required>
+                            <input type="text" id="novoCPF" placeholder="Digite o CPF..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novoRG">RG:</label>
+                            <input type="text" id="novoRG" placeholder="Digite o RG..." required>
                         </div>
                         <div class="form-group">
                             <label for="novaFuncao">Função no sistema:</label>
@@ -72,11 +76,11 @@
                         </div>
                         <div class="form-group">
                             <label for="novoCargo">Cargo:</label>
-                            <input type="text" id="novoCargo" placeholder="Digite o cargo" required>
+                            <input type="text" id="novoCargo" placeholder="Digite o cargo..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoDepartamento">Departamento:</label>
-                            <input type="text" id="novoDepartamento" placeholder="Digite o departamento" required>
+                            <input type="text" id="novoDepartamento" placeholder="Digite o departamento..." required>
                         </div>
                         <div style="display: flex; justify-content: flex-end; gap: 10px;">
                             <button onclick="fecharCadastroBox()"><i class="fas fa-times"></i> Cancelar</button>
@@ -91,6 +95,7 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>CPF</th>
+                            <th>RG</th>
                             <th>Função no sistema</th>
                             <th>Cargo</th>
                             <th>Departamento</th>
@@ -114,6 +119,10 @@
                         <div class="form-group">
                             <label for="editCPF">CPF:</label>
                             <input type="text" id="editCPF" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCPF">RG:</label>
+                            <input type="text" id="editRG" readonly>
                         </div>
                         <div class="form-group">
                             <label for="editFuncao">Função no sistema:</label>
