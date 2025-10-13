@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos e Treinamentos - Metrô SP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-subway"></i>
+                Metrô SP - Treinamentos
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPage('login')"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="#" onclick="showPage('cursos')"><i class="fas fa-graduation-cap"></i> Cursos</a></li>
+                    <li><a href="#" onclick="showPage('alunoDashboard')"><i class="fas fa-user-graduate"></i> Área do Aluno</a></li>
+                    <li><a href="#" onclick="showPage('adminDashboard')"><i class="fas fa-cog"></i> Administração</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main class="main-content">
+    <div id="cursos" class="page active" aria-hidden="false">
+        <h2><i class="fas fa-graduation-cap"></i> Cursos Disponíveis</h2>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="filterCargo">Filtrar por Cargo:</label>
+                <select id="filterCargo">
+                    <option value="">Todos os cargos</option>
+                    <option value="operacional">Operacional</option>
+                    <option value="tecnico">Técnico</option>
+                    <option value="supervisor">Supervisor</option>
+                    <option value="gerencial">Gerencial</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filterStatus">Filtrar por Status:</label>
+                <select id="filterStatus">
+                    <option value="">Todos os status</option>
+                    <option value="aberto">Inscrições abertas</option>
+                    <option value="andamento">Em andamento</option>
+                    <option value="concluido">Concluído</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="searchCourse">Buscar curso:</label>
+                <input type="text" id="searchCourse" placeholder="Digite o nome do curso">
+            </div>
+        </div>
+        
+        <div class="card" data-title="NR35 - Trabalho em Altura" data-cargo="operacional,tecnico" data-status="aberto">
+            <h3><i class="fas fa-hard-hat"></i> NR35 - Trabalho em Altura <span class="badge badge-success">Disponível</span></h3>
+            <p><strong>Código:</strong> NR35-TURMA-0823</p>
+            <p>Curso sobre normas de segurança para trabalho em altura conforme estabelece a NR35.</p>
+            <p><strong>Carga horária:</strong> 40 horas</p>
+            <p><strong>Instrutor:</strong> Eng. Carlos Oliveira</p>
+            <p><strong>Restrição:</strong> Cargos operacionais e técnicos</p>
+            <button onclick="verDetalhes('nr35')"><i class="fas fa-info-circle"></i> Ver Detalhes</button>
+            
+            <div id="detalhes-nr35" class="curso-detalhes" aria-hidden="true">
+                <h4>Conteúdo Programático</h4>
+                <ul>
+                    <li>Normas e regulamentos aplicáveis</li>
+                    <li>Análise de Risco e condições impeditivas</li>
+                    <li>Equipamentos de Proteção Individual (EPI)</li>
+                    <li>Equipamentos de Proteção Coletiva (EPC)</li>
+                    <li>Primeiros socorros</li>
+                </ul>
+                <button style="margin-top: 15px;" onclick="inscreverCurso('NR35 - Trabalho em Altura')"><i class="fas fa-check"></i> Inscrever-se</button>
+            </div>
+        </div>
+        
+        <div class="card" data-title="NR10 - Segurança em Instalações Elétricas" data-cargo="tecnico" data-status="andamento">
+            <h3><i class="fas fa-bolt"></i> NR10 - Segurança em Instalações Elétricas <span class="badge badge-warning">Em breve</span></h3>
+            <p><strong>Código:</strong> NR10-TURMA-0923</p>
+            <p>Treinamento para prevenção de acidentes com instalações e serviços em eletricidade.</p>
+            <p><strong>Carga horária:</strong> 60 horas</p>
+            <p><strong>Instrutor:</strong> Eng. Mariana Santos</p>
+            <p><strong>Restrição:</strong> Cargos técnicos</p>
+            <button onclick="verDetalhes('nr10')"><i class="fas fa-info-circle"></i> Ver Detalhes</button>
+            
+            <div id="detalhes-nr10" class="curso-detalhes" aria-hidden="true">
+                <h4>Conteúdo Programático</h4>
+                <ul>
+                    <li>Introdução à segurança com eletricidade</li>
+                    <li>Riscos em instalações e serviços com eletricidade</li>
+                    <li>Técnicas de análise de risco</li>
+                    <li>Medidas de controle do risco elétrico</li>
+                    <li>Normas técnicas brasileiras</li>
+                </ul>
+                <button style="margin-top: 15px;" onclick="inscreverCurso('NR10 - Segurança em Instalações Elétricas')" disabled><i class="fas fa-clock"></i> Em breve</button>
+            </div>
+        </div>
+        
+        <div class="card" data-title="Liderança e Gestão de Equipes" data-cargo="supervisor,gerencial" data-status="concluido">
+            <h3><i class="fas fa-users"></i> Liderança e Gestão de Equipes <span class="badge badge-info">Restrito</span></h3>
+            <p><strong>Código:</strong> LID-TURMA-0823</p>
+            <p>Desenvolvimento de competências gerenciais e liderança para supervisores e gerentes.</p>
+            <p><strong>Carga horária:</strong> 30 horas</p>
+            <p><strong>Instrutor:</strong> Dr. Roberto Almeida</p>
+            <p><strong>Restrição:</strong> Cargos supervisorios e gerenciais</p>
+            <button onclick="verDetalhes('lideranca')"><i class="fas fa-info-circle"></i> Ver Detalhes</button>
+            
+            <div id="detalhes-lideranca" class="curso-detalhes" aria-hidden="true">
+                <h4>Conteúdo Programático</h4>
+                <ul>
+                    <li>Papel do líder na organização</li>
+                    <li>Comunicação eficaz</li>
+                    <li>Gestão de conflitos</li>
+                    <li>Feedback e desenvolvimento de equipes</li>
+                    <li>Planejamento e delegação de tarefas</li>
+                </ul>
+                <button style="margin-top: 15px;" onclick="inscreverCurso('Liderança e Gestão de Equipes')"><i class="fas fa-check"></i> Inscrever-se</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
