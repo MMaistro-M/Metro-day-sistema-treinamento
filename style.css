@@ -411,6 +411,26 @@
             background-color: var(--azul-claro);
             color: white;
         }
+
+        #infoRGM {
+            color: #777; 
+            font-size: 0.9rem; 
+            display: none;
+        }
+
+        #tabelaUsuarios td.rgm-vazio {
+            text-align: center;
+            color: #555;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        #tabelaUsuarios td.vazio {
+          text-align: center;
+          color: #555;
+          font-weight: 600;
+          font-family: monospace;
+        }
         
         .filters {
             display: flex;

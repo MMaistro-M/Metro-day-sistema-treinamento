@@ -29,8 +29,10 @@
                             <option value="">Todos</option>
                             <option value="administrador">Administradores do sistema</option>
                             <option value="instrutor">Instrutores</option>
+                            <option value="empresa_convidada">Empresas Convidadas</option>
                             <option value="monitor">Monitores</option>
                             <option value="aluno">Alunos</option>
+                            <option value="aluno_convidado">Aluno Convidado</option>
                         </select>
                     </div>
                     <div class="filter-group">
@@ -66,8 +68,10 @@
                                 <option value="">Selecione</option>
                                 <option value="administrador">Administrador</option>
                                 <option value="instrutor">Instrutor</option>
+                                <option value="empresa_convidada">Empresa Convidada</option>
                                 <option value="monitor">Monitor</option>
                                 <option value="aluno">Aluno</option>
+                                <option value="aluno_convidado">Aluno Convidado</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -112,18 +116,23 @@
                             <input type="email" id="editEmail">
                         </div>
                         <div class="form-group">
-                            <label for="editCPF">RGM:</label>
-                            <input type="text" id="editRG" readonly>
+                            <label for="editRGM">RGM:</label>
+                            <input type="text" id="editRGM" readonly>
                         </div>
                         <div class="form-group">
                             <label for="editFuncao">Função no sistema:</label>
                             <select id="editFuncao">
                                 <option value="administrador">Administrador do sistema</option>
                                 <option value="instrutor">Instrutor</option>
+                                <option value="empresa_convidada">Empresa Convidada</option>
                                 <option value="monitor">Monitor</option>
                                 <option value="aluno">Aluno</option>
+                                <option value="aluno_convidado">Aluno Convidado</option>
                             </select>
                         </div>
+                        <p id="infoRGM">
+                            * Empresas convidadas não possuem RGM, este campo está desativado.
+                        </p>
                         <div class="form-group">
                             <label for="editCargo">Cargo:</label>
                             <input type="text" id="editCargo">
