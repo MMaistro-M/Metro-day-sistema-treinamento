@@ -1,9 +1,9 @@
 // Registro de usuários até linkarmos um banco de dados
 let usuarios = [
-  { nome: "João Silva", email: "joao.silva@email.com", cpf: "123.456.789-00", rg: "12345678-9", funcao: "aluno", cargo: "Técnico de Manutenção", departamento: "Manutenção" },
-  { nome: "Maria Santos", email: "maria.santos@email.com", cpf: "234.567.890-11", rg: "23456789-0", funcao: "monitor", cargo: "Assistente Operacional", departamento: "Operações" },
-  { nome: "Carlos Pereira", email: "carlos.pereira@email.com", cpf: "345.678.901-22", rg: "34567890-1", funcao: "instrutor", cargo: "Engenheiro de Treinamento", departamento: "Segurança" },
-  { nome: "Fernanda Lima", email: "fernanda.lima@email.com", cpf: "456.789.012-33", rg: "45678901-2", funcao: "administrador", cargo: "Coordenadora de RH", departamento: "Gestão de Pessoas" }
+  { nome: "João Silva", email: "joao.silva@email.com", rgm: "1234567", funcao: "aluno", cargo: "Técnico de Manutenção", departamento: "Manutenção" },
+  { nome: "Maria Santos", email: "maria.santos@email.com", rgm: "2345678", funcao: "monitor", cargo: "Assistente Operacional", departamento: "Operações" },
+  { nome: "Carlos Pereira", email: "carlos.pereira@email.com", rgm: "3456789", funcao: "instrutor", cargo: "Engenheiro de Treinamento", departamento: "Segurança" },
+  { nome: "Fernanda Lima", email: "fernanda.lima@email.com", rgm: "4567890", funcao: "administrador", cargo: "Coordenadora de RH", departamento: "Gestão de Pessoas" }
 ];
 
 // ====================== FUNÇÃO: RENDERIZAR TABELA ======================
@@ -16,8 +16,7 @@ function renderTabelaUsuarios(lista = usuarios) {
     tr.innerHTML = `
       <td>${u.nome}</td>
       <td>${u.email}</td>
-      <td>${u.cpf}</td>
-      <td>${u.rg}</td>
+      <td>${u.rgm}</td>
       <td>${u.funcao.charAt(0).toUpperCase() + u.funcao.slice(1)}</td>
       <td>${u.cargo}</td>
       <td>${u.departamento}</td>
@@ -52,8 +51,7 @@ function editarUsuario(index) {
 
   document.getElementById("editNome").value = u.nome;
   document.getElementById("editEmail").value = u.email;
-  document.getElementById("editCPF").value = u.cpf;
-  document.getElementById("editRG").value = u.rg;
+  document.getElementById("editRGM").value = u.rgm;
   document.getElementById("editFuncao").value = u.funcao;
   document.getElementById("editCargo").value = u.cargo;
   document.getElementById("editDepartamento").value = u.departamento;
@@ -62,8 +60,7 @@ function editarUsuario(index) {
     usuarios[index] = {
       nome: document.getElementById("editNome").value,
       email: document.getElementById("editEmail").value,
-      cpf: document.getElementById("editCPF").value,
-      rg: document.getElementById("editRG").value,
+      rgm: document.getElementById("editRGM").value,
       funcao: document.getElementById("editFuncao").value,
       cargo: document.getElementById("editCargo").value,
       departamento: document.getElementById("editDepartamento").value
@@ -102,8 +99,7 @@ function abrirCadastroBox() {
   // limpa os campos sempre que abrir
   document.getElementById("novoNome").value = "";
   document.getElementById("novoEmail").value = "";
-  document.getElementById("novoCPF").value = "";
-  document.getElementById("novoRG").value = "";
+  document.getElementById("novoRGM").value = "";
   document.getElementById("novaFuncao").value = "";
   document.getElementById("novoCargo").value = "";
   document.getElementById("novoDepartamento").value = "";
@@ -116,30 +112,23 @@ function fecharCadastroBox() {
 function salvarNovoCadastro() {
   const nome = document.getElementById("novoNome").value.trim();
   const email = document.getElementById("novoEmail").value.trim();
-  const cpf = document.getElementById("novoCPF").value.trim();
-  const rg = document.getElementById("novoRG").value.trim();
+  const rgm = document.getElementById("novoRGM").value.trim();
   const funcao = document.getElementById("novaFuncao").value;
   const cargo = document.getElementById("novoCargo").value.trim();
   const departamento = document.getElementById("novoDepartamento").value.trim();
 
-  if (!nome || !email || !cpf || !rg || !funcao || !cargo || !departamento) {
+  if (!nome || !email || !rgm || !funcao || !cargo || !departamento) {
     alert("Preencha todos os campos antes de salvar.");
     return;
   }
 
-  // Verifica se o CPF já existe
-  if (usuarios.some(u => u.cpf === cpf)) {
-    alert("Já existe um usuário com este CPF.");
+  //Verifica se o RGM já existe
+  if (usuarios.some(u => u.rgm === rgm)) {
+    alert("Já existe um usuário com este RGM.");
     return;
   }
 
-  //Verifica se o RG já existe
-  if (usuarios.some(u => u.rg === rg)) {
-    alert("Já existe um usuário com este RG.");
-    return;
-  }
-
-  usuarios.push({ nome, email, cpf, rg, funcao, cargo, departamento });
+  usuarios.push({ nome, email, rgm, funcao, cargo, departamento });
   renderTabelaUsuarios();
   fecharCadastroBox();
 }
