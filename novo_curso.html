@@ -3,31 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Novo Curso - Metrô SP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="novo_curso.css">
 </head>
 <body>
-    <div class="form-container">
-        <form id="cursoForm">
-            <label for="nome">Nome do curso: </label>
-            <input type="text" id="nome" name="nome" required>
+    <section id="novo-curso" class="page active">
+        <div class="conteudo-bloco">
+    
+            <div class="form-container">
+                <form id="cursoForm">
+                    <label for="nome">Nome do curso: </label>
+                    <input type="text" id="nome" name="nome" required>
+    
+                    <label for="codigo">Codigo do curso: </label>
+                    <input type="text" id="codigo" name="codigo" required>
+    
+                    <label for="descricao">Descrição do curso:</label>
+                    <textarea id="descricao" name="descricao"></textarea>
+    
+                    <label for="carga">Carga Horária do curso (horas):</label>
+                    <input type="number" id="carga" name="carga" required>
+    
+                    <label for="instrutor">Instrutor do curso: </label>
+                    <input type="text" id="instrutor" name="instrutor" required>
+    
+                    <label for="restrição">Restrições do curso: </label>
+                    <input type="text" id="restrição" name="restrição">
+    
+                    <button type="submit">Criar Curso</button>
+                </form> 
+            </div>
+        </div>
+    </section>
 
-            <label for="codigo">Codigo do curso: </label>
-            <input type="text" id="codigo" name="codigo" required>
-
-            <label for="descricao">Descrição do curso:</label>
-            <textarea id="descricao" name="descricao"></textarea>
-
-            <label for="carga">Carga Horária do curso (horas):</label>
-            <input type="number" id="carga" name="carga" required>
-
-            <label for="instrutor">Instrutor do curso: </label>
-            <input type="text" id="instrutor" name="instrutor" required>
-
-            <label for="restrição">Restrições do curso: </label>
-            <input type="text" id="restrição" name="restrição">
-
-            <button type="submit">Criar Curso</button>
-        </form> 
-    </div>
 </body>
 </html>

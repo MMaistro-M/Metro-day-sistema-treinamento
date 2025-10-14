@@ -1,0 +1,73 @@
+body {
+    background-color: #004d99;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#novo-curso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.conteudo-bloco {
+    background-color: #ffffff;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
+}
+
+#novo-curso h2 {
+    text-align: center;
+    color: #004d99;
+    margin-bottom: 25px;
+}
+
+#novo-curso h2 i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: none;
+    height: 80px;
+}
+
+form button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
