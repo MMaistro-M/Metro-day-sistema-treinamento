@@ -431,6 +431,32 @@
           font-weight: 600;
           font-family: monospace;
         }
+
+        /* Botão desabilitado (failsafe admin) */
+        .btn-disabled {
+         background-color: #888;
+         color: #fff;
+         cursor: not-allowed;
+         opacity: 0.7;
+         border: none;
+         width: 100%;
+         text-align: center;
+         padding: 0.55rem 0.8rem;
+         font-size: 0.9rem;
+         font-weight: 600;
+         border-radius: 5px;
+         display: flex;
+         flex-direction: column; /* permite o texto em duas linhas */
+         align-items: center;
+         justify-content: center;
+         gap: 4px; /* espaçamento entre o ícone e o texto */
+         line-height: 1.2;
+         height: 60px;
+         }
+
+         tn-disabled i {
+         font-size: 1.2rem;
+         }
         
         .filters {
             display: flex;

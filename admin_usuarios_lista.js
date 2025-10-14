@@ -15,6 +15,7 @@ function renderTabelaUsuarios(lista = usuarios) {
 
   lista.forEach((u, index) => {
     const isConvidado = u.funcao === "empresa_convidada" || u.funcao === "aluno_convidado";
+    const isAdmin = u.funcao === "administrador";
 
     const rgmDisplay = isConvidado ? "–" : u.rgm;
     const cargoDisplay = isConvidado && (!u.cargo || u.cargo === "-") ? "–" : u.cargo;
@@ -23,6 +24,11 @@ function renderTabelaUsuarios(lista = usuarios) {
     const rgmClass = isConvidado ? "class='vazio'" : "";
     const cargoClass = cargoDisplay === "–" ? "class='vazio'" : "";
     const deptoClass = deptoDisplay === "–" ? "class='vazio'" : "";
+
+    // Failsafe: bloqueia edição de administradores
+    const botoesAcoes = isAdmin
+      ? `<button class="btn-disabled" disabled title="Administradores não podem ser editados"><i class="fas fa-ban"></i> Editar bloqueado</button>`
+      : `<button onclick="editarUsuario(${index})"><i class="fas fa-edit"></i> Editar</button>`;
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -33,7 +39,7 @@ function renderTabelaUsuarios(lista = usuarios) {
       <td ${cargoClass}>${cargoDisplay}</td>
       <td ${deptoClass}>${deptoDisplay}</td>
       <td>
-        <button onclick="editarUsuario(${index})"><i class="fas fa-edit"></i> Editar</button>
+        ${botoesAcoes}
         <button class="btn-danger" onclick="excluirUsuario(${index})"><i class="fas fa-trash"></i> Excluir</button>
       </td>
     `;
