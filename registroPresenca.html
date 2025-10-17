@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Presença - Sistema de Treinamentos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-custom">
+        <!-- Header -->
+        <header class="header-custom">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="logo-custom">
+                            <i class="fas fa-subway"></i>
+                            Metrô SP - Treinamentos
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-12">
+                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                            <a class="nav-link" href="login.html">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-graduation-cap"></i> Cursos
+                            </a>
+                            <a class="nav-link" href="areaAluno.html">
+                                <i class="fas fa-user-graduate"></i> Área do Aluno
+                            </a>
+                            <a class="nav-link" href="dashBoardAdm.html">
+                                <i class="fas fa-cog"></i> Administração
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container-fluid">
+                <h2 class="mb-4">
+                    <i class="fas fa-clipboard-list"></i> Registro de Presença
+                </h2>
+                
+                <!-- Cabeçalho do Registro -->
+                <div class="card-custom mb-4">
+                    <div class="row align-items-end">
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <div class="mb-3">
+                                <label for="selectTurma" class="form-label">Selecionar Turma:</label>
+                                <select id="selectTurma" class="form-select form-control-custom">
+                                    <option value="">Selecione uma turma</option>
+                                    <option value="nr35-0823">NR35-TURMA-0823</option>
+                                    <option value="nr10-0723">NR10-TURMA-0723</option>
+                                    <option value="lideranca-0823">LID-TURMA-0823</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="dataAula" class="form-label">Data da Aula:</label>
+                                <input type="date" id="dataAula" class="form-control form-control-custom">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-metro mb-2" onclick="inicializarRegistroPresenca()">
+                                    <i class="fas fa-sync-alt"></i> Carregar Alunos
+                                </button>
+                                <button class="btn btn-metro mb-2" id="btnGerarRelatorio">
+                                    <i class="fas fa-chart-bar"></i> Gerar Relatório
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Alunos -->
+                <div class="card-custom mb-4">
+                    <h3 class="mb-3">
+                        <i class="fas fa-users"></i> Lista de Alunos
+                    </h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Matrícula</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th class="text-center">Presença</th>
+                                    <th class="text-center">Assinatura</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Os alunos serão carregados dinamicamente via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Pad de Assinatura -->
+                <div class="signature-pad-container" style="display: none;">
+                    <div class="card-custom">
+                        <h3><i class="fas fa-signature"></i> Assinatura Digital</h3>
+                        
+                        <div class="aluno-info-assinatura">
+                            <p>Aluno: <span id="alunoAssinaturaNome">-</span></p>
+                            <p>CPF: <span id="alunoAssinaturaCPF">-</span></p>
+                        </div>
+                        
+                        <p>Assine no campo abaixo utilizando o mouse ou touchscreen:</p>
+                        
+                        <canvas id="signature-pad" class="signature-pad" width="600" height="200"></canvas>
+                        
+                        <div class="signature-actions mt-3">
+                            <button class="btn btn-warning" onclick="limparAssinatura()">
+                                <i class="fas fa-eraser"></i> Limpar
+                            </button>
+                            <button class="btn btn-success" onclick="salvarAssinatura()">
+                                <i class="fas fa-check"></i> Confirmar Assinatura
+                            </button>
+                            <button class="btn btn-danger" onclick="cancelarAssinatura()">
+                                <i class="fas fa-times"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Área do Relatório (será preenchida dinamicamente) -->
+                <div id="area-relatorio">
+                    <!-- O relatório será inserido aqui via JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Customizado -->
+    <script src="script.js"></script>
+
+    <!-- Script adicional para garantir o funcionamento -->
+    <script>
+        // Garante que as funções estejam disponíveis quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página de registro de presença carregada');
+            
+            // Configura o botão de gerar relatório
+            const btnGerarRelatorio = document.getElementById('btnGerarRelatorio');
+            if (btnGerarRelatorio) {
+                btnGerarRelatorio.addEventListener('click', function() {
+                    console.log('Botão Gerar Relatório clicado');
+                    if (typeof gerarRelatorioPresenca === 'function') {
+                        gerarRelatorioPresenca();
+                    } else {
+                        console.error('Função gerarRelatorioPresenca não encontrada');
+                        alert('Erro: Função não carregada. Recarregue a página.');
+                    }
+                });
+            }
+            
+            // Configura data atual
+            const dataAula = document.getElementById('dataAula');
+            if (dataAula && !dataAula.value) {
+                const hoje = new Date().toISOString().split('T')[0];
+                dataAula.value = hoje;
+            }
+            
+            // Inicializa signature pad
+            if (typeof initSignaturePad === 'function') {
+                initSignaturePad();
+            }
+        });
+        
+        // Função fallback caso o script principal não carregue
+        function garantirFuncionamento() {
+            if (typeof gerarRelatorioPresenca === 'undefined') {
+                console.warn('Recarregando funções...');
+                setTimeout(() => {
+                    if (typeof gerarRelatorioPresenca === 'undefined') {
+                        alert('Erro ao carregar as funções. Recarregue a página.');
+                    }
+                }, 1000);
+            }
+        }
+        
+        // Executa a verificação após um tempo
+        setTimeout(garantirFuncionamento, 2000);
+    </script>
+</body>
+</html>

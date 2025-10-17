@@ -11,24 +11,15 @@
     --cinza-escuro: #777777;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Compatibilidade com Bootstrap */
 body {
     background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-escuro) 100%);
     color: #333;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
 }
 
-.container {
+.container-custom {
     width: 100%;
     max-width: 1400px;
     background-color: var(--branco);
@@ -37,242 +28,143 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-header {
+/* Header personalizado */
+.header-custom {
     background: linear-gradient(90deg, var(--azul-escuro) 0%, var(--vermelho-metro) 100%);
     color: var(--branco);
     padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.logo {
+.logo-custom {
     font-size: 1.8rem;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
 
-.logo i {
+.logo-custom i {
     margin-right: 10px;
     color: var(--azul-brilhante);
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 1.5rem;
-}
-
-nav ul li a {
-    color: var(--branco);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
+.nav-custom .nav-link {
+    color: var(--branco) !important;
+    padding: 0.5rem 1rem !important;
     border-radius: 4px;
     transition: background-color 0.3s;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
-nav ul li a i {
+.nav-custom .nav-link i {
     margin-right: 8px;
 }
 
-nav ul li a:hover {
+.nav-custom .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.nav-custom .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+}
+
+/* Conteúdo principal */
 .main-content {
     padding: 2rem;
     min-height: 600px;
 }
 
-.page {
-    display: none;
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.active {
-    display: block;
-}
-
-h2 {
-    color: var(--azul-escuro);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--vermelho-metro);
-    padding-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-}
-
-h2 i {
-    margin-right: 10px;
-    color: var(--vermelho-metro);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--azul-escuro);
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-select,
-textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--cinza);
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--azul-claro);
-    outline: none;
-}
-
-button {
-    background-color: var(--azul-medio);
-    color: var(--branco);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-button i {
-    margin-right: 8px;
-}
-
-button:hover {
-    background-color: var(--azul-escuro);
-}
-
-button.btn-danger {
-    background-color: var(--vermelho-metro);
-}
-
-button.btn-danger:hover {
-    background-color: #AA0000;
-}
-
-.card {
+/* Cards personalizados */
+.card-custom {
     border: 1px solid var(--cinza);
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     background-color: var(--branco);
     transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
 }
 
-.card:hover {
+.card-custom:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.card h3 {
+.card-custom h3 {
     color: var(--azul-medio);
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
 }
 
-.card h3 i {
+.card-custom h3 i {
     margin-right: 10px;
 }
 
-.card p {
-    margin-bottom: 1rem;
-    color: var(--cinza-escuro);
+/* Botões personalizados */
+.btn-metro {
+    background-color: var(--azul-medio);
+    color: var(--branco);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+.btn-metro i {
+    margin-right: 8px;
 }
 
-table th,
-table td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid var(--cinza);
-}
-
-table th {
-    background-color: var(--azul-claro);
+.btn-metro:hover {
+    background-color: var(--azul-escuro);
     color: var(--branco);
 }
 
-table tr:nth-child(even) {
+.btn-danger-metro {
+    background-color: var(--vermelho-metro);
+}
+
+.btn-danger-metro:hover {
+    background-color: #AA0000;
+}
+
+/* Formulários personalizados */
+.form-group-custom label {
+    font-weight: 600;
+    color: var(--azul-escuro);
+}
+
+.form-control-custom {
+    border: 1px solid var(--cinza);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-control-custom:focus {
+    border-color: var(--azul-claro);
+    box-shadow: 0 0 0 0.2rem rgba(0, 119, 204, 0.25);
+}
+
+/* Tabelas personalizadas */
+.table-custom th {
+    background-color: var(--azul-claro);
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.table-custom tbody tr:nth-child(even) {
     background-color: var(--cinza-claro);
 }
 
-.admin-link {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--azul-escuro);
-    color: var(--branco);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-    z-index: 100;
-}
-
-.admin-link:hover {
-    transform: scale(1.1);
-}
-
-.checkbox-presenca {
-    transform: scale(1.5);
-    cursor: pointer;
-}
-
-.login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: var(--branco);
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
+/* User type selector */
 .user-type-selector {
     display: flex;
     margin-bottom: 1.5rem;
@@ -296,41 +188,8 @@ table tr:nth-child(even) {
     font-weight: 600;
 }
 
-.curso-detalhes {
-    display: none;
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background-color: var(--cinza-claro);
-    border-radius: 8px;
-    border-left: 4px solid var(--azul-medio);
-}
-
-.aluno-dashboard {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-}
-
-.admin-dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.aluno-info, .admin-panel {
-    background-color: var(--cinza-claro);
-    padding: 1.5rem;
-    border-radius: 8px;
-}
-
-.aluno-cursos, .admin-content {
-    background-color: var(--branco);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--cinza);
-}
-
-.progress-bar {
+/* Progress bar */
+.progress-bar-custom {
     background-color: #e0e0e0;
     border-radius: 5px;
     height: 20px;
@@ -338,58 +197,15 @@ table tr:nth-child(even) {
     overflow: hidden;
 }
 
-.progress {
+.progress-custom {
     background-color: var(--azul-medio);
     height: 100%;
     border-radius: 5px;
+    transition: width 0.3s ease;
 }
 
-.signature-pad {
-    border: 1px solid var(--cinza);
-    border-radius: 4px;
-    margin: 15px 0;
-    background-color: var(--branco);
-}
-
-.signature-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.certificado {
-    border: 2px solid var(--azul-escuro);
-    padding: 2rem;
-    margin: 1rem 0;
-    background-color: var(--branco);
-    position: relative;
-}
-
-.certificado h3 {
-    text-align: center;
-    color: var(--azul-escuro);
-    margin-bottom: 1.5rem;
-}
-
-.certificado-content {
-    text-align: center;
-}
-
-.certificado-footer {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 3rem;
-}
-
-.assinatura {
-    text-align: center;
-    border-top: 1px solid var(--cinza-escuro);
-    padding-top: 0.5rem;
-    width: 200px;
-}
-
-.badge {
-    display: inline-block;
+/* Badges */
+.badge-metro {
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -412,34 +228,92 @@ table tr:nth-child(even) {
     color: white;
 }
 
-.filters {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+/* Signature pad */
+.signature-pad {
+    border: 1px solid var(--cinza);
+    border-radius: 4px;
+    margin: 15px 0;
+    background-color: var(--branco);
+    width: 100%;
+    max-width: 600px;
+    touch-action: none;
 }
 
-.filter-group {
-    display: flex;
-    flex-direction: column;
+/* Certificado */
+.certificado {
+    border: 2px solid var(--azul-escuro);
+    padding: 2rem;
+    margin: 1rem 0;
+    background-color: var(--branco);
+    position: relative;
 }
 
-/* NOVOS ESTILOS PARA REGISTRO DE PRESENÇA */
-.registro-presenca-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.certificado h3 {
+    text-align: center;
+    color: var(--azul-escuro);
     margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 15px;
 }
 
-.registro-actions {
+.certificado-content {
+    text-align: center;
+}
+
+.certificado-footer {
     display: flex;
-    gap: 10px;
-    margin-top: 1rem;
+    justify-content: space-around;
+    margin-top: 3rem;
+    flex-wrap: wrap;
 }
 
+.assinatura {
+    text-align: center;
+    border-top: 1px solid var(--cinza-escuro);
+    padding-top: 0.5rem;
+    width: 200px;
+    margin: 0.5rem;
+}
+
+/* Admin link flutuante */
+.admin-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    z-index: 100;
+}
+
+.admin-link:hover {
+    transform: scale(1.1);
+    color: var(--branco);
+}
+
+/* Detalhes do curso */
+.curso-detalhes {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+    border-left: 4px solid var(--azul-medio);
+}
+
+/* Filtros */
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+/* Info assinatura */
 .aluno-info-assinatura {
     background-color: var(--cinza-claro);
     padding: 1rem;
@@ -454,24 +328,13 @@ table tr:nth-child(even) {
     color: var(--azul-escuro);
 }
 
+/* Relatório */
 .relatorio-presenca {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: var(--cinza-claro);
     border-radius: 8px;
     border: 1px solid var(--cinza);
-}
-
-.relatorio-presenca h3 {
-    margin-bottom: 1rem;
-    color: var(--azul-escuro);
-    display: flex;
-    align-items: center;
-}
-
-.relatorio-presenca h3 i {
-    margin-right: 10px;
-    color: var(--vermelho-metro);
 }
 
 .relatorio-table {
@@ -520,86 +383,136 @@ table tr:nth-child(even) {
     font-weight: bold;
 }
 
-/* Estilos para responsividade do registro de presença */
-@media (max-width: 992px) {
-    .aluno-dashboard, .admin-dashboard {
-        grid-template-columns: 1fr;
-    }
-    
-    .registro-presenca-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .registro-actions {
-        width: 100%;
-        justify-content: flex-start;
-    }
+/* Checkbox personalizado */
+.checkbox-presenca {
+    transform: scale(1.3);
+    cursor: pointer;
 }
 
+/* Ações de assinatura */
+.signature-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* Responsividade adicional */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
+    .header-custom {
+        padding: 1rem;
     }
     
-    nav ul li {
-        margin: 0.5rem 0;
-    }
-    
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .logo {
+    .logo-custom {
+        font-size: 1.4rem;
+        justify-content: center;
         margin-bottom: 1rem;
     }
     
-    .filters {
-        flex-direction: column;
-    }
-    
-    .registro-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .registro-actions button {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-    
-    .relatorio-table {
-        font-size: 0.8rem;
-    }
-    
-    .relatorio-table th,
-    .relatorio-table td {
-        padding: 0.5rem;
-    }
-    
-    .signature-pad {
-        width: 100%;
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
     .main-content {
         padding: 1rem;
     }
     
-    .relatorio-table {
-        display: block;
+    .user-type-selector {
+        flex-direction: column;
+    }
+    
+    .certificado-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .assinatura {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .signature-pad {
+        height: 150px;
+    }
+    
+    .nav-custom {
         overflow-x: auto;
-        white-space: nowrap;
+        padding-bottom: 10px;
     }
     
-    .registro-presenca-header {
-        gap: 10px;
+    .signature-actions {
+        flex-direction: column;
     }
     
-    .aluno-info-assinatura {
-        padding: 0.75rem;
+    .signature-actions .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
     }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container-custom {
+        border-radius: 8px;
+    }
+    
+    .card-custom {
+        padding: 1rem;
+    }
+    
+    .btn-metro {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .logo-custom {
+        font-size: 1.2rem;
+    }
+    
+    .certificado {
+        padding: 1rem;
+    }
+    
+    .certificado-footer {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

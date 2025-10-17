@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Aluno - Sistema de Treinamentos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-custom">
+        <!-- Header -->
+        <header class="header-custom">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="logo-custom">
+                            <i class="fas fa-subway"></i>
+                            Metrô SP - Treinamentos
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-12">
+                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                            <a class="nav-link" href="login.html">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                            <a class="nav-link" href="index.html">
+                                <i class="fas fa-graduation-cap"></i> Cursos
+                            </a>
+                            <a class="nav-link active" href="areaAluno.html">
+                                <i class="fas fa-user-graduate"></i> Área do Aluno
+                            </a>
+                            <a class="nav-link" href="dashBoardAdm.html">
+                                <i class="fas fa-cog"></i> Administração
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container-fluid">
+                <h2 class="mb-4">
+                    <i class="fas fa-user-graduate"></i> Área do Aluno
+                </h2>
+                
+                <div class="row">
+                    <!-- Dados do Aluno -->
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card-custom">
+                            <h3><i class="fas fa-user"></i> Meus Dados</h3>
+                            <p><strong>Nome:</strong> João Silva</p>
+                            <p><strong>Matrícula:</strong> 123456</p>
+                            <p><strong>CPF:</strong> 123.456.789-00</p>
+                            <p><strong>Email:</strong> joao.silva@email.com</p>
+                            <p><strong>Cargo:</strong> Técnico de Manutenção</p>
+                            <p><strong>Departamento:</strong> Manutenção</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Cursos do Aluno -->
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card-custom mb-4">
+                            <h3><i class="fas fa-book"></i> Meus Cursos</h3>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-hard-hat"></i> NR35 - Trabalho em Altura</h4>
+                                        <p><strong>Status:</strong> Em andamento (65% concluído)</p>
+                                        <div class="progress-bar-custom">
+                                            <div class="progress-custom" style="width: 65%"></div>
+                                        </div>
+                                        <p><strong>Turma:</strong> NR35-TURMA-0823</p>
+                                        <p><strong>Próxima aula:</strong> 25/08/2023 - 14:00</p>
+                                        <button class="btn btn-metro w-100 mt-2">
+                                            <i class="fas fa-play-circle"></i> Continuar Curso
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-bolt"></i> NR10 - Segurança em Instalações Elétricas</h4>
+                                        <p><strong>Status:</strong> Concluído</p>
+                                        <p><strong>Turma:</strong> NR10-TURMA-0723</p>
+                                        <p><strong>Data de conclusão:</strong> 10/07/2023</p>
+                                        <p><strong>Nota:</strong> 9.2</p>
+                                        <button class="btn btn-metro w-100 mt-2">
+                                            <i class="fas fa-download"></i> Emitir Certificado
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificados -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h3 class="mb-3">
+                            <i class="fas fa-file-certificate"></i> Meus Certificados
+                        </h3>
+                        
+                        <div class="certificado">
+                            <h3>CERTIFICADO</h3>
+                            <div class="certificado-content">
+                                <p>Certificamos que <strong>João Silva</strong>, matrícula <strong>123456</strong>,</p>
+                                <p>concluiu com êxito o curso de <strong>NR10 - Segurança em Instalações Elétricas</strong>,</p>
+                                <p>com carga horária de <strong>60 horas</strong>, realizado em <strong>Julho de 2023</strong>.</p>
+                            </div>
+                            <div class="certificado-footer">
+                                <div class="assinatura">
+                                    <p></p>
+                                    <p>Eng. Mariana Santos</p>
+                                    <p>Instrutora</p>
+                                </div>
+                                <div class="assinatura">
+                                    <p></p>
+                                    <p>João Silva</p>
+                                    <p>Aluno</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Link Flutuante -->
+    <a href="loginAdm.html" class="admin-link">
+        <i class="fas fa-user-cog"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Customizado -->
+    <script src="script.js"></script>
+</body>
+</html>

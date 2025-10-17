@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinatura Digital - Sistema de Treinamentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-subway"></i>
+                Metrô SP - Treinamentos
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="index.html"><i class="fas fa-graduation-cap"></i> Cursos</a></li>
+                    <li><a href="areaAluno.html"><i class="fas fa-user-graduate"></i> Área do Aluno</a></li>
+                    <li><a href="dashBoardAdm.html"><i class="fas fa-cog"></i> Administração</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main class="main-content">
+            <h2><i class="fas fa-signature"></i> Assinatura Digital</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-info-circle"></i> Informações da Assinatura</h3>
+                <p>Esta página é dedicada ao sistema de assinatura digital para certificados e documentos do sistema de treinamentos.</p>
+                <p>Para utilizar o sistema de assinatura, acesse a página de <a href="registroPresenca.html">Registro de Presença</a>.</p>
+            </div>
+            
+            <div class="signature-pad-container" style="margin-top: 2rem;">
+                <h3><i class="fas fa-signature"></i> Área de Assinatura</h3>
+                
+                <div class="aluno-info-assinatura">
+                    <p>Aluno: <span id="alunoAssinaturaNome">João Silva</span></p>
+                    <p>CPF: <span id="alunoAssinaturaCPF">123.456.789-00</span></p>
+                    <p>Curso: <span id="cursoAssinatura">NR35 - Trabalho em Altura</span></p>
+                </div>
+                
+                <p>Assine no campo abaixo utilizando o mouse ou touchscreen:</p>
+                
+                <canvas id="signature-pad" class="signature-pad" width="600" height="200"></canvas>
+                
+                <div class="signature-actions">
+                    <button onclick="limparAssinatura()"><i class="fas fa-eraser"></i> Limpar</button>
+                    <button onclick="salvarAssinatura()"><i class="fas fa-check"></i> Confirmar Assinatura</button>
+                    <button class="btn-danger" onclick="cancelarAssinatura()"><i class="fas fa-times"></i> Cancelar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
