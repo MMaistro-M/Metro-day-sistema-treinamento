@@ -17,11 +17,41 @@
 <body>
     <div class="container-custom container-fluid fade-in my-4">
 
-        <!-- Cabeçalho -->
-        <header class="header-full">
-            <img src="logo_metrosp.svg" alt="Logo Metrô SP">
-            <span>Metrô SP - Administrador do Sistema</span>
+        <header class="header-custom">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-lg-4 col-md-6 col-12">
+                <div class="logo-custom">
+                  <img src="logo_metrosp.svg" alt="Logo">
+                  Metrô SP - Treinamentos
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-6 col-12">
+                <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                  <a class="nav-link" href="login.html">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                  </a>
+                  <a class="nav-link" href="index.html">
+                    <i class="fas fa-graduation-cap"></i> Cursos
+                  </a>
+                  <a class="nav-link" href="areaAluno.html">
+                    <i class="fas fa-user-graduate"></i> Área do Aluno
+                  </a>
+                  <a class="nav-link active" href="dashBoardAdm.html">
+                    <i class="fas fa-cog"></i> Administração
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </div>
         </header>
+
+        <!-- Botão de voltar -->
+        <div class="container-fluid mt-3">
+          <button class="btn btn-secondary" onclick="window.location.href='dashBoardAdm.html'">
+            <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+          </button>
+        </div>
         
         <main class="main-content">
 
