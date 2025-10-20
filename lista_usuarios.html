@@ -4,28 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários</title>
+    <title>Usuários - SITREM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-subway"></i>
-                Metrô SP - Administrador do Sistema
-            </div>
+    <div class="container-custom container-fluid fade-in my-4">
+
+        <!-- Cabeçalho -->
+        <header class="header-full">
+            <img src="logo_metrosp.svg" alt="Logo Metrô SP">
+            <span>Metrô SP - Administrador do Sistema</span>
         </header>
+        
         <main class="main-content">
+
             <!-- Página da Lista de Usuários (apenas para Administradores) -->
-            <div id="adminUsuariosLista" class="page active" aria-hidden="false">
-                <!-- mudar pra class="page" e aria-hidden="true" depois -->
-                <h2><i class="fas fa-users-cog"></i> Lista de Usuários Registrados</h2>
-                <div class="filters">
-                    <div class="filter-group">
-                        <label for="filtroFuncaoUsuario">Filtrar por função:</label>
-                        <select name="" id="filtroFuncaoUsuario">
+            <div id="adminUsuariosLista" class="page active" aria-hidden="true">
+
+                <!-- mudar pra class="page" -->
+                <h2 class="mb-4"><i class="fas fa-users-cog"></i> Lista de Usuários Registrados</h2>
+
+                <!-- Filtros -->
+                <div class="filters row g-3 mb-3">
+                    <div class="filter-group col-md-6 col-lg-4">
+                        <label for="filtroFuncaoUsuario" class="form-label fw-semibold">Filtrar por função:</label>
+                        <select id="filtroFuncaoUsuario" class="form-select">
                             <option value="">Todos</option>
                             <option value="administrador">Administradores do sistema</option>
                             <option value="instrutor">Instrutores</option>
@@ -35,36 +45,38 @@
                             <option value="aluno_convidado">Aluno Convidado</option>
                         </select>
                     </div>
-                    <div class="filter-group">
-                        <label for="buscaUsuario">Buscar por nome:</label>
-                        <input type="text" id="buscaUsuario" placeholder="Digite o nome...">
+                    <div class="filter-group col-md-6 col-lg-4">
+                        <label for="buscaUsuario" class="form-label fw-semibold">Buscar por nome:</label>
+                        <input type="text" id="buscaUsuario" class="form-control" placeholder="Digite o nome...">
                     </div>
                 </div>
+
                 <!-- Botão de adicionar novo usuário -->
-                <div style="margin-top: 10px;">
-                    <button id="btnAdicionarUsuario" class="btn-success">
-                        <i class="fas fa-user-plus"></i> Adicionar +
+                <div class="mt-3 mb-4">
+                    <button id="btnAdicionarUsuario" class="btn btn-success d-flex align-items-center">
+                        <i class="fas fa-user-plus me-2"></i> Adicionar +
                     </button>
                 </div>
+
                 <!-- Box de cadastro de novo usuário -->
                 <div id="cadastroBox" class="modal">
                     <div class="modal-content">
                         <h3><i class="fas fa-user-plus"></i> Preencha o novo cadastro</h3>
                         <div class="form-group">
                             <label for="novoNome">Nome:</label>
-                            <input type="text" id="novoNome" placeholder="Digite o nome completo..." required>
+                            <input type="text" id="novoNome" class="form-control" placeholder="Digite o nome completo..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoEmail">E-mail:</label>
-                            <input type="email" id="novoEmail" placeholder="Digite o e-mail..." required>
+                            <input type="email" id="novoEmail" class="form-control" placeholder="Digite o e-mail..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoRGM">RGM:</label>
-                            <input type="text" id="novoRGM" placeholder="Digite o RGM..." required>
+                            <input type="text" id="novoRGM" class="form-control" placeholder="Digite o RGM..." required>
                         </div>
                         <div class="form-group">
                             <label for="novaFuncao">Função no sistema:</label>
-                            <select id="novaFuncao" required>
+                            <select id="novaFuncao" class="form-select" required>
                                 <option value="">Selecione</option>
                                 <option value="administrador">Administrador</option>
                                 <option value="instrutor">Instrutor</option>
@@ -76,52 +88,58 @@
                         </div>
                         <div class="form-group">
                             <label for="novoCargo">Cargo:</label>
-                            <input type="text" id="novoCargo" placeholder="Digite o cargo..." required>
+                            <input type="text" id="novoCargo" class="form-control" placeholder="Digite o cargo..." required>
                         </div>
                         <div class="form-group">
                             <label for="novoDepartamento">Departamento:</label>
-                            <input type="text" id="novoDepartamento" placeholder="Digite o departamento..." required>
+                            <input type="text" id="novoDepartamento" class="form-control" placeholder="Digite o departamento..." required>
                         </div>
-                        <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                            <button onclick="fecharCadastroBox()"><i class="fas fa-times"></i> Cancelar</button>
-                            <button id="salvarNovoUsuario" class="btn-success"><i class="fas fa-save"></i>
-                                Salvar</button>
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button onclick="fecharCadastroBox()" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</button>
+                            <button id="salvarNovoUsuario" class="btn btn-success"><i class="fas fa-save"></i>Salvar</button>
                         </div>
                     </div>
                 </div>
-                <table id="tabelaUsuarios">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>RGM</th>
-                            <th>Função no sistema</th>
-                            <th>Cargo</th>
-                            <th>Departamento</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usuariosBody">
-                    </tbody>
-                </table>
+
+                <!-- Tabela de usuários -->
+                 <div class="table-responsive mt-4">
+                     <table id="tabelaUsuarios" class="table table-hover table-bordered align-middle text-center">
+                         <thead class="table-primary">
+                             <tr>
+                                 <th>Nome</th>
+                                 <th>Email</th>
+                                 <th>RGM</th>
+                                 <th>Função no sistema</th>
+                                 <th>Cargo</th>
+                                 <th>Departamento</th>
+                             </tr>
+                         </thead>
+                         <tbody id="usuariosBody"></tbody>
+                     </table>
+                 </div>
+
                 <!-- Modal de edição -->
                 <div id="editModal" class="modal">
                     <div class="modal-content">
                         <h3><i class="fas fa-user-edit"></i> Editar Usuário</h3>
                         <div class="form-group">
                             <label for="editNome">Nome:</label>
-                            <input type="text" id="editNome">
+                            <input type="text" id="editNome" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="editEmail">E-mail:</label>
-                            <input type="email" id="editEmail">
+                            <input type="email" id="editEmail" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="editRGM">RGM:</label>
-                            <input type="text" id="editRGM" readonly>
+                            <input type="text" id="editRGM" class="form-control" readonly>
                         </div>
+                        <p id="infoRGMEdit" class="text-secondary small fade-message" style="display: none;">
+                            * Empresas e alunos convidados não possuem RGM; este campo está desativado.
+                        </p>
                         <div class="form-group">
                             <label for="editFuncao">Função no sistema:</label>
-                            <select id="editFuncao">
+                            <select id="editFuncao" class="form-select">
                                 <option value="administrador">Administrador do sistema</option>
                                 <option value="instrutor">Instrutor</option>
                                 <option value="empresa_convidada">Empresa Convidada</option>
@@ -130,20 +148,19 @@
                                 <option value="aluno_convidado">Aluno Convidado</option>
                             </select>
                         </div>
-                        <p id="infoRGM">
-                            * Empresas convidadas não possuem RGM, este campo está desativado.
-                        </p>
                         <div class="form-group">
                             <label for="editCargo">Cargo:</label>
-                            <input type="text" id="editCargo">
+                            <input type="text" id="editCargo" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="editDepartamento">Departamento:</label>
-                            <input type="text" id="editDepartamento">
+                            <input type="text" id="editDepartamento" class="form-control">
                         </div>
-                        <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                            <button onclick="fecharModal()"><i class="fas fa-times"></i> Cancelar</button>
-                            <button id="saveEditBtn"><i class="fas fa-save"></i> Salvar</button>
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button onclick="fecharModal()" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancelar</button>
+                            <button id="saveEditBtn" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -151,6 +168,9 @@
         </main>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
     <script src="admin_usuarios_lista.js"></script>
 </body>

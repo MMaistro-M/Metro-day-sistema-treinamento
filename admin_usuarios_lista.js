@@ -67,22 +67,44 @@ function editarUsuario(index) {
   const modal = document.getElementById("editModal");
   modal.style.display = "block";
 
-  document.getElementById("editNome").value = u.nome;
-  document.getElementById("editEmail").value = u.email;
-  document.getElementById("editRGM").value = u.rgm;
-  document.getElementById("editFuncao").value = u.funcao;
-  document.getElementById("editCargo").value = u.cargo;
-  document.getElementById("editDepartamento").value = u.departamento;
+  // campos
+  const inputNome = document.getElementById("editNome");
+  const inputEmail = document.getElementById("editEmail");
+  const inputRGM = document.getElementById("editRGM");
+  const selectFuncao = document.getElementById("editFuncao");
+  const inputCargo = document.getElementById("editCargo");
+  const inputDepto = document.getElementById("editDepartamento");
+  const infoRGM = document.getElementById("infoRGMEdit");
 
-  document.getElementById("saveEditBtn").onclick = function() {
-    usuarios[index] = {
-      nome: document.getElementById("editNome").value,
-      email: document.getElementById("editEmail").value,
-      rgm: document.getElementById("editRGM").value,
-      funcao: document.getElementById("editFuncao").value,
-      cargo: document.getElementById("editCargo").value,
-      departamento: document.getElementById("editDepartamento").value
-    };
+  // preenche dados
+  inputNome.value = u.nome;
+  inputEmail.value = u.email;
+  inputRGM.value = u.rgm;
+  selectFuncao.value = u.funcao;
+  inputCargo.value = u.cargo;
+  inputDepto.value = u.departamento;
+
+  // mostra ou esconde a mensagem e desativa o campo se for convidado
+  const isConvidado = u.funcao === "empresa_convidada" || u.funcao === "aluno_convidado";
+  if (isConvidado) {
+    inputRGM.disabled = true;
+    infoRGM.style.display = "block";
+    setTimeout(() => infoRGM.classList.add("show"), 10); // fade-in
+  } else {
+    inputRGM.disabled = false;
+    infoRGM.style.display = "none";
+    setTimeout(() => (infoRGM.style.display = "none"), 300); // fade-out
+  }
+
+  // evento de salvar
+  document.getElementById("saveEditBtn").onclick = function () {
+    u.nome = inputNome.value;
+    u.email = inputEmail.value;
+    u.funcao = selectFuncao.value;
+    u.cargo = inputCargo.value;
+    u.departamento = inputDepto.value;
+    u.rgm = isConvidado ? "–" : inputRGM.value;
+
     modal.style.display = "none";
     renderTabelaUsuarios();
   };
@@ -204,7 +226,7 @@ const deptoInput = document.getElementById("novoDepartamento");
 
 if (funcaoSelect && cargoInput && deptoInput) {
   funcaoSelect.addEventListener("change", () => {
-    if (funcaoSelect.value === "empresa_convidada") {
+    if (funcaoSelect.value === "empresa_convidada" || funcaoSelect.value === "aluno_convidado") {
       cargoInput.placeholder = "Opcional";
       deptoInput.placeholder = "Opcional";
     } else {
