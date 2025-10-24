@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper></div>
+            <div class="vw-plugin-top-wrapper"></div>
+    </div>
     <div class="container-custom">
         <!-- Header -->
         <header class="header-custom">
@@ -147,7 +153,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JavaScript Customizado -->
     <script src="script.js"></script>
-
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app')
+    </script>
     <!-- Script adicional para garantir o funcionamento -->
     <script>
         // Garante que as funções estejam disponíveis quando a página carregar
@@ -195,6 +205,6 @@
         
         // Executa a verificação após um tempo
         setTimeout(garantirFuncionamento, 2000);
-    </script>
+        </script>
 </body>
 </html>
