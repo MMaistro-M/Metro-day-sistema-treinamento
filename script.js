@@ -116,9 +116,9 @@ function inscreverCurso(curso) {
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('btn-assinar') || e.target.closest('.btn-assinar')) {
         const btn = e.target.classList.contains('btn-assinar') ? e.target : e.target.closest('.btn-assinar');
-        const cpf = btn.getAttribute('data-cpf');
-        if (cpf) {
-            abrirPadAssinatura(cpf);
+        const RGM = btn.getAttribute('data-RGM');
+        if (RGM) {
+            abrirPadAssinatura(RGM);
         }
     }
 });
@@ -198,16 +198,16 @@ function salvarAssinatura() {
     const container = document.querySelector('.signature-pad-container');
     if (!container) return;
     
-    const cpf = container.getAttribute('data-cpf');
-    const aluno = alunos.find(a => a.cpf === cpf);
+    const RGM = container.getAttribute('data-RGM');
+    const aluno = alunos.find(a => a.RGM === RGM);
     
     if (aluno) {
-        const checkbox = document.querySelector(`.checkbox-presenca[data-cpf="${cpf}"]`);
+        const checkbox = document.querySelector(`.checkbox-presenca[data-RGM="${RGM}"]`);
         
         if (checkbox && checkbox.checked) {
             alert(`Assinatura salva com sucesso para ${aluno.nome}! Presença registrada.`);
             
-            const alunoIndex = alunos.findIndex(a => a.cpf === cpf);
+            const alunoIndex = alunos.findIndex(a => a.RGM === RGM);
             if (alunoIndex !== -1) {
                 alunos[alunoIndex].presencas++;
                 if (alunos[alunoIndex].presencas > alunos[alunoIndex].totalAulas) {
@@ -281,11 +281,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Mock de alunos ATUALIZADO
 let alunos = [
-    { matricula: "123456", nome: "João Silva", cpf: "123.456.789-00", presencas: 3, faltas: 0, totalAulas: 5 },
-    { matricula: "234567", nome: "Maria Santos", cpf: "234.567.890-11", presencas: 2, faltas: 1, totalAulas: 5 },
-    { matricula: "345678", nome: "Pedro Costa", cpf: "345.678.901-22", presencas: 4, faltas: 0, totalAulas: 5 },
-    { matricula: "456789", nome: "Ana Oliveira", cpf: "456.789.012-33", presencas: 5, faltas: 0, totalAulas: 5 },
-    { matricula: "567890", nome: "Carlos Souza", cpf: "567.890.123-44", presencas: 1, faltas: 4, totalAulas: 5 }
+    { matricula: "123456", nome: "João Silva", RGM: "123.456.789-00", presencas: 3, faltas: 0, totalAulas: 5 },
+    { matricula: "234567", nome: "Maria Santos", RGM: "234.567.890-11", presencas: 2, faltas: 1, totalAulas: 5 },
+    { matricula: "345678", nome: "Pedro Costa", RGM: "345.678.901-22", presencas: 4, faltas: 0, totalAulas: 5 },
+    { matricula: "456789", nome: "Ana Oliveira", RGM: "456.789.012-33", presencas: 5, faltas: 0, totalAulas: 5 },
+    { matricula: "567890", nome: "Carlos Souza", RGM: "567.890.123-44", presencas: 1, faltas: 4, totalAulas: 5 }
 ];
 
 // SISTEMA DE REGISTRO DE PRESENÇA - NOVAS FUNÇÕES
@@ -337,12 +337,12 @@ function carregarAlunosTurma(turmaId) {
         tr.innerHTML = `
             <td>${aluno.matricula}</td>
             <td>${aluno.nome}</td>
-            <td>${aluno.cpf}</td>
+            <td>${aluno.RGM}</td>
             <td class="text-center">
-                <input type="checkbox" class="checkbox-presenca" data-cpf="${aluno.cpf}" ${aluno.presencas > 0 ? 'checked' : ''}>
+                <input type="checkbox" class="checkbox-presenca" data-RGM="${aluno.RGM}" ${aluno.presencas > 0 ? 'checked' : ''}>
             </td>
             <td class="text-center">
-                <button class="btn btn-sm btn-metro btn-assinar" data-cpf="${aluno.cpf}">
+                <button class="btn btn-sm btn-metro btn-assinar" data-RGM="${aluno.RGM}">
                     <i class="fas fa-signature"></i> Assinar
                 </button>
             </td>
@@ -352,32 +352,32 @@ function carregarAlunosTurma(turmaId) {
     
     document.querySelectorAll('.checkbox-presenca').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-            const cpf = this.getAttribute('data-cpf');
-            atualizarPresencaAluno(cpf, this.checked);
+            const RGM = this.getAttribute('data-RGM');
+            atualizarPresencaAluno(RGM, this.checked);
         });
     });
 }
 
 // Atualizar presença do aluno
-function atualizarPresencaAluno(cpf, presente) {
-    const alunoIndex = alunos.findIndex(a => a.cpf === cpf);
+function atualizarPresencaAluno(RGM, presente) {
+    const alunoIndex = alunos.findIndex(a => a.RGM === RGM);
     if (alunoIndex !== -1) {
         console.log(`Aluno ${alunos[alunoIndex].nome}: ${presente ? 'Presente' : 'Falta'}`);
     }
 }
 
 // Abrir pad de assinatura para um aluno específico
-function abrirPadAssinatura(cpf) {
-    const aluno = alunos.find(a => a.cpf === cpf);
+function abrirPadAssinatura(RGM) {
+    const aluno = alunos.find(a => a.RGM === RGM);
     if (aluno) {
         const nomeElement = document.getElementById('alunoAssinaturaNome');
-        const cpfElement = document.getElementById('alunoAssinaturaCPF');
+        const RGMElement = document.getElementById('alunoAssinaturaRGM');
         const container = document.querySelector('.signature-pad-container');
         
         if (nomeElement) nomeElement.textContent = aluno.nome;
-        if (cpfElement) cpfElement.textContent = aluno.cpf;
+        if (RGMElement) RGMElement.textContent = aluno.RGM;
         if (container) {
-            container.setAttribute('data-cpf', cpf);
+            container.setAttribute('data-RGM', RGM);
             container.style.display = 'block';
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -455,7 +455,7 @@ function criarHTMLRelatorio(turma) {
             <tr>
                 <td>${aluno.matricula}</td>
                 <td>${aluno.nome}</td>
-                <td>${aluno.cpf}</td>
+                <td>${aluno.RGM}</td>
                 <td class="text-center">${aluno.presencas}</td>
                 <td class="text-center">${faltas}</td>
                 <td class="text-center">${aluno.totalAulas}</td>
@@ -490,7 +490,7 @@ function criarHTMLRelatorio(turma) {
                             <tr>
                                 <th>Matrícula</th>
                                 <th>Nome</th>
-                                <th>CPF</th>
+                                <th>RGM</th>
                                 <th class="text-center">Presenças</th>
                                 <th class="text-center">Faltas</th>
                                 <th class="text-center">Total Aulas</th>
