@@ -3,14 +3,15 @@ let usuarios = [];
 // Função para carregar usuários do backend
 async function carregarUsuarios() {
   try {
-    const res = await fetch("http://localhost:3000/usuarios");
-    if (!res.ok) throw new Error("Erro de resposta da API");
-
-    usuarios = await res.json();
-    renderTabelaUsuarios();
-  } catch (e) {
-    console.error("Erro ao carregar usuários:", e);
-    alert("Erro ao carregar usuários do banco.");
+    const res = await fetch("http://localhost:3000/usuarios")
+    if (!res.ok) {
+      throw new Error(`Erro HTTP: ${res.status}`)
+    }
+    usuarios = await res.json()
+    renderTabelaUsuarios()
+  } catch (error) {
+    console.error("Erro ao carregar usuários:", error)
+    alert("Erro ao carregar usuários. Verifique se o servidor está rodando.")
   }
 }
 
@@ -104,6 +105,24 @@ async function salvarEdicaoUsuario() {
   }
 }
 
+function aplicarLogicaCamposEdicao(funcao) {
+  const rgmInput = document.getElementById("editRGM");
+  const infoRGM = document.getElementById("infoRGMEdit");
+  
+  if (funcao === "empresa_convidada" || funcao === "aluno_convidado") {
+    rgmInput.value = "–";
+    rgmInput.disabled = true;
+    if (infoRGM) infoRGM.style.display = "block";
+  } else {
+    rgmInput.disabled = false;
+    if (infoRGM) infoRGM.style.display = "none";
+  }
+}
+
+function fecharModalEdicao() {
+  document.getElementById("editModal").style.display = "none";
+}
+
 // ====================== FUNÇÃO: EXCLUIR USUÁRIO ======================
 async function excluirUsuario(index) {
   const usuario = usuarios[index];
@@ -144,6 +163,18 @@ function abrirModalEdicao(index) {
 
   document.getElementById("editModal").style.display = "block";
   aplicarLogicaCamposEdicao(usuario.funcao);
+}
+
+function formatarFuncao(funcao) {
+  const formatacoes = {
+    'administrador': 'Administrador',
+    'instrutor': 'Instrutor', 
+    'empresa_convidada': 'Empresa Convidada',
+    'monitor': 'Monitor',
+    'aluno': 'Aluno',
+    'aluno_convidado': 'Aluno Convidado'
+  };
+  return formatacoes[funcao] || funcao;
 }
 
 function debounce(fn, wait = 250) {
@@ -194,7 +225,7 @@ async function salvarNovoCadastro() {
     return;
   }
 
-  // Verifica RGM duplicado (caso queira manter)
+  // Verifica RGM duplicado 
   if (!isConvidado && usuarios.some(u => u.rgm === rgm)) {
     alert("Já existe um usuário com esse RGM.");
     return;
@@ -266,6 +297,7 @@ if (funcaoSelect && cargoInput && deptoInput) {
   });
 }
 
+// ====================== INICIALIZAÇÃO ======================
 document.addEventListener("DOMContentLoaded", () => {
   carregarUsuarios();
 
@@ -274,11 +306,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnSalvarNovo = document.getElementById("salvarNovoUsuario");
   const filtroFuncao = document.getElementById("filtroFuncaoUsuario");
   const busca = document.getElementById("buscaUsuario");
+  const btnSalvarEdicao = document.getElementById("salvarEdicaoUsuario");
+  const editFuncao = document.getElementById("editFuncao");
 
   if (btnAdd) btnAdd.addEventListener("click", abrirCadastroBox);
   if (btnSalvarNovo) btnSalvarNovo.addEventListener("click", salvarNovoCadastro);
   if (filtroFuncao) filtroFuncao.addEventListener("change", aplicarFiltroUsuarios);
   if (busca) busca.addEventListener("input", debounce(aplicarFiltroUsuarios, 200));
+  if (btnSalvarEdicao) {
+    btnSalvarEdicao.addEventListener("click", salvarEdicaoUsuario);
+  }
+  if (editFuncao) {
+    editFuncao.addEventListener("change", (e) => {
+      aplicarLogicaCamposEdicao(e.target.value);
+    });
+  }
 
   // Fecha modal ao clicar fora
   window.addEventListener("click", e => {
