@@ -1,0 +1,32 @@
+{
+  "name": "pii_2s",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMaistro-M/Metro-day-sistema-treinamento.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MMaistro-M/Metro-day-sistema-treinamento/issues"
+  },
+  "homepage": "https://github.com/MMaistro-M/Metro-day-sistema-treinamento#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "mongoose-unique-validator": "^4.0.1",
+    "nodemon": "^3.1.10"
+  }
+}

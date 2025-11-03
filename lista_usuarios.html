@@ -63,7 +63,6 @@
             <!-- Página da Lista de Usuários (apenas para Administradores) -->
             <div id="adminUsuariosLista" class="page active" aria-hidden="true">
 
-                <!-- mudar pra class="page" -->
                 <h2 class="mb-4"><i class="fas fa-users-cog"></i> Lista de Usuários Registrados</h2>
 
                 <!-- Filtros -->
@@ -94,7 +93,7 @@
                 </div>
 
                 <!-- Box de cadastro de novo usuário -->
-                <div id="cadastroBox" class="modal">
+                <div id="cadastroBox" class="modal-custom">
                     <div class="modal-content">
                         <h3><i class="fas fa-user-plus"></i> Preencha o novo cadastro</h3>
                         <div class="form-group">
@@ -107,7 +106,7 @@
                         </div>
                         <div class="form-group">
                             <label for="novoRGM">RGM:</label>
-                            <input type="text" id="novoRGM" class="form-control" placeholder="Digite o RGM..." required>
+                            <input type="text" id="novoRGM" class="form-control" placeholder="Digite o RGM...">
                         </div>
                         <div class="form-group">
                             <label for="novaFuncao">Função no sistema:</label>
@@ -123,15 +122,15 @@
                         </div>
                         <div class="form-group">
                             <label for="novoCargo">Cargo:</label>
-                            <input type="text" id="novoCargo" class="form-control" placeholder="Digite o cargo..." required>
+                            <input type="text" id="novoCargo" class="form-control" placeholder="Digite o cargo...">
                         </div>
                         <div class="form-group">
                             <label for="novoDepartamento">Departamento:</label>
-                            <input type="text" id="novoDepartamento" class="form-control" placeholder="Digite o departamento..." required>
+                            <input type="text" id="novoDepartamento" class="form-control" placeholder="Digite o departamento...">
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-3">
-                            <button onclick="fecharCadastroBox()" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</button>
-                            <button id="salvarNovoUsuario" class="btn btn-success"><i class="fas fa-save"></i>Salvar</button>
+                            <button type="button" onclick="fecharCadastroBox()" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</button>
+                            <button type="button" id="salvarNovoUsuario" class="btn btn-success"><i class="fas fa-save"></i>Salvar</button>
                         </div>
                     </div>
                 </div>
@@ -154,50 +153,61 @@
                  </div>
 
                 <!-- Modal de edição -->
-                <div id="editModal" class="modal">
-                    <div class="modal-content">
-                        <h3><i class="fas fa-user-edit"></i> Editar Usuário</h3>
-                        <div class="form-group">
-                            <label for="editNome">Nome:</label>
-                            <input type="text" id="editNome" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmail">E-mail:</label>
-                            <input type="email" id="editEmail" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="editRGM">RGM:</label>
-                            <input type="text" id="editRGM" class="form-control" readonly>
-                        </div>
-                        <p id="infoRGMEdit" class="text-secondary small fade-message" style="display: none;">
-                            * Empresas e alunos convidados não possuem RGM; este campo está desativado.
-                        </p>
-                        <div class="form-group">
-                            <label for="editFuncao">Função no sistema:</label>
-                            <select id="editFuncao" class="form-select">
-                                <option value="administrador">Administrador do sistema</option>
-                                <option value="instrutor">Instrutor</option>
-                                <option value="empresa_convidada">Empresa Convidada</option>
-                                <option value="monitor">Monitor</option>
-                                <option value="aluno">Aluno</option>
-                                <option value="aluno_convidado">Aluno Convidado</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="editCargo">Cargo:</label>
-                            <input type="text" id="editCargo" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="editDepartamento">Departamento:</label>
-                            <input type="text" id="editDepartamento" class="form-control">
-                        </div>
-                        <div class="d-flex justify-content-end gap-2 mt-3">
-                            <button onclick="fecharModal()" class="btn btn-secondary">
-                                <i class="fas fa-times"></i> Cancelar</button>
-                            <button id="saveEditBtn" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Salvar</button>
-                        </div>
+                <div id="editModal" class="modal-custom">
+                  <div class="modal-content">
+                    <h5 class="mb-3">Editar Usuário</h5>
+                
+                    <!-- Campo oculto para ID do usuário -->
+                    <input type="hidden" id="editId">
+                
+                    <div class="mb-3">
+                      <label for="editNome" class="form-label">Nome:</label>
+                      <input type="text" id="editNome" class="form-control" required>
                     </div>
+                
+                    <div class="mb-3">
+                      <label for="editEmail" class="form-label">Email:</label>
+                      <input type="email" id="editEmail" class="form-control" required>
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="editRGM" class="form-label">RGM:</label>
+                      <input type="text" id="editRGM" class="form-control" required>
+                      <p id="infoRGMEdit" class="text-muted small fade-message" style="display: none;">
+                        * Empresas e alunos convidados não possuem RGM; este campo está desativado.
+                      </p>
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="editFuncao" class="form-label">Função no sistema:</label>
+                      <select id="editFuncao" class="form-select" required>
+                        <option value="">Selecione...</option>
+                        <option value="administrador">Administrador</option>
+                        <option value="instrutor">Instrutor</option>
+                        <option value="monitor">Monitor</option>
+                        <option value="aluno">Aluno</option>
+                        <option value="empresa_convidada">Empresa Convidada</option>
+                        <option value="aluno_convidado">Aluno Convidado</option>
+                      </select>
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="editCargo" class="form-label">Cargo:</label>
+                      <input type="text" id="editCargo" class="form-control">
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="editDepartamento" class="form-label">Departamento:</label>
+                      <input type="text" id="editDepartamento" class="form-control">
+                    </div>
+                
+                    <div class="d-flex justify-content-end mt-4">
+                      <button type="button" class="btn btn-secondary me-2" onclick="fecharModalEdicao()">Cancelar</button>
+                      <button type="button" class="btn btn-success" id="salvarEdicaoUsuario">
+                        <i class="fas fa-save"></i> Salvar
+                      </button>
+                    </div>
+                  </div>
                 </div>
             </div>
         </main>
@@ -207,10 +217,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
-    <script src="admin_usuarios_lista.js"></script>
+    <script src="lista_usuarios.js" defer></script>
     <!-- VLibras -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
+    <script defer>
         new window.VLibras.Widget('https://vlibras.gov.br/app')
     </script>
     <!-- Embed Im: widget de acessibilidade -->

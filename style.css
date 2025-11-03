@@ -528,16 +528,23 @@ body {
 }
 
 /* ===== Modal de Edição ===== */
-.modal {
-  display: none;
+.modal-custom {
+  display: none;               /* controlado via JS */
   position: fixed;
-  z-index: 200;
+  z-index: 1050;               /* acima do conteúdo */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,.4);
+}
+.modal-custom .modal-content {
+  background: #fff;
+  max-width: 700px;
+  margin: 6rem auto;
+  padding: 1.5rem;
+  border-radius: 8px;
 }
 .modal-content {
   background-color: var(--branco);
