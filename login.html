@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de Treinamentos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -29,22 +30,7 @@
                             Metrô SP - Treinamentos
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-6 col-12">
-                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
-                            <a class="nav-link active" href="login.html">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                            <a class="nav-link" href="index.html">
-                                <i class="fas fa-graduation-cap"></i> Cursos
-                            </a>
-                            <a class="nav-link" href="areaAluno.html">
-                                <i class="fas fa-user-graduate"></i> Área do Aluno
-                            </a>
-                            <a class="nav-link" href="dashBoardAdm.html">
-                                <i class="fas fa-cog"></i> Administração
-                            </a>
-                        </nav>
-                    </div>
+                
                 </div>
             </div>
         </header>
@@ -61,17 +47,15 @@
                         <div class="user-type-selector mb-4">
                             <div class="user-type active" id="alunoType" onclick="selectUserType('aluno')">Aluno</div>
                             <div class="user-type" id="instrutorType" onclick="selectUserType('instrutor')">Instrutor</div>
-                            <div class="user-type" id="monitorType" onclick="selectUserType('monitor')">Monitor</div>
-                            <div class="user-type" id="adminType" onclick="selectUserType('admin')">Administrador</div>
                         </div>
                         
                         <div class="card-custom">
                             <form id="loginForm">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label form-group-custom">
-                                        <i class="fas fa-envelope"></i> E-mail:
+                                    <label for="username" class="form-label form-group-custom">
+                                        <i class="fas fa-user"></i> RGM:
                                     </label>
-                                    <input type="email" id="email" class="form-control form-control-custom" autocomplete="username" required autofocus>
+                                    <input type="text" id="username" class="form-control form-control-custom" autocomplete="username" required autofocus>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label form-group-custom">
@@ -94,17 +78,11 @@
         </main>
     </div>
 
+    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JavaScript Customizado -->
     <script src="script.js"></script>
-    <script src="backend.js" defer></script>
-    <!-- VLibras -->
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app')
-    </script>
-    <!-- Embed Im: widget de acessibilidade -->
-    <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 </html>
