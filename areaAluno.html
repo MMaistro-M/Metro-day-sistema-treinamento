@@ -98,9 +98,19 @@
                                         <p><strong>Turma:</strong> NR10-TURMA-0723</p>
                                         <p><strong>Data de conclusão:</strong> 10/07/2023</p>
                                         <p><strong>Nota:</strong> 9.2</p>
-                                        <button class="btn btn-metro w-100 mt-2">
+                                        <button class="btn btn-metro w-100 mt-2" onclick="baixarCertificado()">
                                             <i class="fas fa-download"></i> Emitir Certificado
                                         </button>
+                                        
+                                        <script>
+                                            function baixarCertificado() {
+                                                const link = document.createElement('a');
+                                                link.href = 'Certificado.pdf'; // caminho do PDF
+                                                link.download = 'Certificado.pdf'; // nome do arquivo ao baixar
+                                                link.click();
+                                            }
+                                            </script>
+
                                     </div>
                                 </div>
                             </div>
