@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,13 @@
     <!-- CSS Customizado -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- VLibras -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper></div>
-            <div class="vw-plugin-top-wrapper"></div>
+        <div class="vw-plugin-top-wrapper"></div>
     </div>
     <div class="container-custom">
         <!-- Header -->
@@ -30,7 +32,8 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-12">
-                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                        <nav
+                            class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
                             <a class="nav-link" href="login.html">
                                 <i class="fas fa-sign-in-alt"></i> Login
                             </a>
@@ -48,14 +51,14 @@
                 </div>
             </div>
         </header>
-        
+
         <!-- Main Content -->
         <main class="main-content">
             <div class="container-fluid">
                 <h2 class="mb-4">
                     <i class="fas fa-user-graduate"></i> Área do Aluno
                 </h2>
-                
+
                 <div class="row">
                     <!-- Dados do Aluno -->
                     <div class="col-lg-4 col-md-12 mb-4">
@@ -69,12 +72,12 @@
                             <p><strong>Departamento:</strong> Manutenção</p>
                         </div>
                     </div>
-                    
+
                     <!-- Cursos do Aluno -->
                     <div class="col-lg-8 col-md-12">
                         <div class="card-custom mb-4">
                             <h3><i class="fas fa-book"></i> Meus Cursos</h3>
-                            
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="card-custom h-100">
@@ -90,7 +93,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-3">
                                     <div class="card-custom h-100">
                                         <h4><i class="fas fa-bolt"></i> NR10 - Segurança em Instalações Elétricas</h4>
@@ -101,7 +104,7 @@
                                         <button class="btn btn-metro w-100 mt-2" onclick="baixarCertificado()">
                                             <i class="fas fa-download"></i> Emitir Certificado
                                         </button>
-                                        
+
                                         <script>
                                             function baixarCertificado() {
                                                 const link = document.createElement('a');
@@ -109,7 +112,44 @@
                                                 link.download = 'Certificado.pdf'; // nome do arquivo ao baixar
                                                 link.click();
                                             }
-                                            </script>
+                                        </script>
+
+                                        <script>
+                                            async function gerarCertificado() {
+                                                const nome = document.getElementById("nome").value;
+
+                                                // Carrega o PDF modelo ORIGINAL
+                                                const existingPdfBytes = await fetch("Certificado.pdf").then(res => res.arrayBuffer());
+                                                const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                                                const page = pdfDoc.getPage(0);
+
+                                                // Fonte padrão
+                                                const font = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+
+                                                // Coordenadas do nome
+                                                const xNome = 200;
+                                                const yNome = 880;
+
+                                                page.drawText(nome, {
+                                                    x: xNome,
+                                                    y: yNome,
+                                                    size: 28,
+                                                    font: font,
+                                                    color: PDFLib.rgb(1, 1, 1)
+                                                });
+
+                                                // Gera o PDF final
+                                                const pdfBytes = await pdfDoc.save();
+
+                                                // Baixa automaticamente
+                                                const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                                                const link = document.createElement("a");
+                                                link.href = URL.createObjectURL(blob);
+                                                link.download = "Certificado-Gerado.pdf";
+                                                link.click();
+                                            }
+                                        </script>
+
 
                                     </div>
                                 </div>
@@ -117,20 +157,22 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Certificados -->
                 <div class="row mt-4">
                     <div class="col-12">
                         <h3 class="mb-3">
                             <i class="fas fa-file-certificate"></i> Meus Certificados
                         </h3>
-                        
+
                         <div class="certificado">
                             <h3>CERTIFICADO</h3>
                             <div class="certificado-content">
                                 <p>Certificamos que <strong>João Silva</strong>, matrícula <strong>123456</strong>,</p>
-                                <p>concluiu com êxito o curso de <strong>NR10 - Segurança em Instalações Elétricas</strong>,</p>
-                                <p>com carga horária de <strong>60 horas</strong>, realizado em <strong>Julho de 2023</strong>.</p>
+                                <p>concluiu com êxito o curso de <strong>NR10 - Segurança em Instalações
+                                        Elétricas</strong>,</p>
+                                <p>com carga horária de <strong>60 horas</strong>, realizado em <strong>Julho de
+                                        2023</strong>.</p>
                             </div>
                             <div class="certificado-footer">
                                 <div class="assinatura">
@@ -163,4 +205,5 @@
     <!-- Embed Im: widget de acessibilidade -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
+
 </html>

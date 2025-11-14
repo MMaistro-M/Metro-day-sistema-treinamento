@@ -725,6 +725,7 @@ function mostrarNotificacao(mensagem, tipo = 'info') {
     }, 5000);
 }
 
+
 // Adicionar CSS para as notificações
 const notificationStyles = document.createElement('style');
 notificationStyles.textContent = `
@@ -763,3 +764,4 @@ if (typeof bootstrap !== 'undefined') {
         });
     });
 }
+
