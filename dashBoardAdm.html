@@ -30,20 +30,40 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-12">
-                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
-                            <a class="nav-link" href="login.html">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                            <a class="nav-link" href="index.html">
-                                <i class="fas fa-graduation-cap"></i> Cursos
-                            </a>
-                            <a class="nav-link" href="areaAluno.html">
-                                <i class="fas fa-user-graduate"></i> Área do Aluno
-                            </a>
-                            <a class="nav-link active" href="dashBoardAdm.html">
-                                <i class="fas fa-cog"></i> Administração
-                            </a>
-                        </nav>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                                <a class="nav-link" href="login.html">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                                <a class="nav-link" href="index.html">
+                                    <i class="fas fa-graduation-cap"></i> Cursos
+                                </a>
+                                <a class="nav-link" href="areaAluno.html">
+                                    <i class="fas fa-user-graduate"></i> Área do Aluno
+                                </a>
+                                <a class="nav-link active" href="dashBoardAdm.html">
+                                    <i class="fas fa-cog"></i> Administração
+                                </a>
+                            </nav>
+                            
+                            <!-- Seletor de Papéis -->
+                            <div class="papel-selector ms-3" id="papelSelector" style="display: none;">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user-shield"></i> 
+                                        <span id="papelAtualTexto">Administrador</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="papeisDisponiveis">
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('instrutor')">
+                                            <i class="fas fa-chalkboard-teacher"></i> Instrutor
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('aluno')">
+                                            <i class="fas fa-user-graduate"></i> Aluno
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,5 +146,24 @@
     </script>
     <!-- Embed Im: widget de acessibilidade -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
+
+    <script>
+        function alternarPapel(novoPapel) {
+            if (novoPapel === 'aluno') {
+                window.location.href = 'areaAluno.html';
+            } else if (novoPapel === 'instrutor') {
+                window.location.href = 'areaInstrutor.html';
+            }
+        }
+
+        // Ao carregar a página, verifica se o usuário tem múltiplos papéis
+        document.addEventListener('DOMContentLoaded', function() {
+            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+            if (usuario && usuario.papeis && usuario.papeis.length > 1) {
+                document.getElementById('papelSelector').style.display = 'block';
+                document.getElementById('papelAtualTexto').textContent = 'Administrador';
+            }
+        });
+    </script>
 </body>
 </html>

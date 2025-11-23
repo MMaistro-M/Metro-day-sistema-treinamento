@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Instrutor - Sistema de Treinamentos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper></div>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+    <div class="container-custom">
+        <!-- Header -->
+        <header class="header-custom">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="logo-custom">
+                            <img src="logo_metrosp.svg" alt="Logo">
+                            Metrô SP - Treinamentos
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-12">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                                <a class="nav-link" href="login.html">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                                <a class="nav-link" href="registroPresenca.html">
+                                    <i class="fas fa-clipboard-list"></i> Registro de Presença
+                                </a>
+                                <a class="nav-link active" href="areaInstrutor.html">
+                                    <i class="fas fa-chalkboard-teacher"></i> Área do Instrutor
+                                </a>
+                                <a class="nav-link" href="dashBoardAdm.html">
+                                    <i class="fas fa-cog"></i> Administração
+                                </a>
+                            </nav>
+                            
+                            <!-- Seletor de Papéis -->
+                            <div class="papel-selector ms-3" id="papelSelector" style="display: none;">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user-shield"></i> 
+                                        <span id="papelAtualTexto">Instrutor</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="papeisDisponiveis">
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('instrutor')">
+                                            <i class="fas fa-chalkboard-teacher"></i> Instrutor
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('aluno')">
+                                            <i class="fas fa-user-graduate"></i> Aluno
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-chalkboard-teacher"></i> Área do Instrutor
+                    </h2>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-metro" onclick="alternarPapel('aluno')">
+                            <i class="fas fa-user-graduate"></i> Acessar como Aluno
+                        </button>
+                        <button class="btn btn-metro" onclick="navigateTo('registroPresenca.html')">
+                            <i class="fas fa-clipboard-list"></i> Registrar Presença
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Dados do Instrutor -->
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card-custom">
+                            <h3><i class="fas fa-user-tie"></i> Meus Dados</h3>
+                            <p><strong>Nome:</strong> Eng. Carlos Oliveira</p>
+                            <p><strong>RGM:</strong> 987.654.321-00</p>
+                            <p><strong>Email:</strong> carlos.oliveira@metrosp.com</p>
+                            <p><strong>Especialidade:</strong> Segurança do Trabalho</p>
+                            <p><strong>Departamento:</strong> Treinamento</p>
+                        </div>
+                    </div>
+
+                    <!-- Turmas do Instrutor -->
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card-custom mb-4">
+                            <h3><i class="fas fa-users"></i> Minhas Turmas</h3>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-hard-hat"></i> NR35 - Trabalho em Altura</h4>
+                                        <p><strong>Turma:</strong> NR35-TURMA-0823</p>
+                                        <p><strong>Status:</strong> Em andamento</p>
+                                        <p><strong>Alunos:</strong> 25 matriculados</p>
+                                        <p><strong>Próxima aula:</strong> 25/08/2023 - 14:00</p>
+                                        <p><strong>Local:</strong> Sala 102 - Centro de Treinamento</p>
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button class="btn btn-metro" onclick="navigateTo('registroPresenca.html')">
+                                                <i class="fas fa-clipboard-list"></i> Registrar Presença
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-shield-alt"></i> NR33 - Espaços Confinados</h4>
+                                        <p><strong>Turma:</strong> NR33-TURMA-0923</p>
+                                        <p><strong>Status:</strong> Em andamento</p>
+                                        <p><strong>Alunos:</strong> 18 matriculados</p>
+                                        <p><strong>Próxima aula:</strong> 02/09/2023 - 09:00</p>
+                                        <p><strong>Local:</strong> Laboratório 05</p>
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button class="btn btn-metro" onclick="navigateTo('registroPresenca.html')">
+                                                <i class="fas fa-clipboard-list"></i> Registrar Presença
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ações Rápidas -->
+                        <div class="card-custom">
+                            <h3><i class="fas fa-tasks"></i> Ações Rápidas</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-clipboard-check"></i> Chamada do Dia</h4>
+                                        <p>Registre a presença dos alunos para a aula de hoje.</p>
+                                        <button class="btn btn-metro w-100" onclick="navigateTo('registroPresenca.html')">
+                                            <i class="fas fa-play"></i> Iniciar Chamada
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-chart-bar"></i> Relatórios</h4>
+                                        <p>Gere relatórios de frequência e desempenho.</p>
+                                        <button class="btn btn-metro w-100" onclick="gerarRelatorios()">
+                                            <i class="fas fa-download"></i> Gerar Relatórios
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Próximas Aulas -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card-custom">
+                            <h3><i class="fas fa-calendar-alt"></i> Próximas Aulas</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Horário</th>
+                                            <th>Curso</th>
+                                            <th>Turma</th>
+                                            <th>Local</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>25/08/2023</td>
+                                            <td>14:00 - 18:00</td>
+                                            <td>NR35 - Trabalho em Altura</td>
+                                            <td>NR35-TURMA-0823</td>
+                                            <td>Sala 102</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-metro" onclick="navigateTo('registroPresenca.html')">
+                                                    <i class="fas fa-clipboard-list"></i> Chamada
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>02/09/2023</td>
+                                            <td>09:00 - 13:00</td>
+                                            <td>NR33 - Espaços Confinados</td>
+                                            <td>NR33-TURMA-0923</td>
+                                            <td>Laboratório 05</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-metro" onclick="navigateTo('registroPresenca.html')">
+                                                    <i class="fas fa-clipboard-list"></i> Chamada
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>05/09/2023</td>
+                                            <td>14:00 - 18:00</td>
+                                            <td>NR35 - Trabalho em Altura</td>
+                                            <td>NR35-TURMA-0823</td>
+                                            <td>Sala 102</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-metro" onclick="navigateTo('registroPresenca.html')">
+                                                    <i class="fas fa-clipboard-list"></i> Chamada
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Customizado -->
+    <script src="script.js"></script>
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app')
+    </script>
+    <!-- Embed Im: widget de acessibilidade -->
+    <script src="https://app.embed.im/accessibility.js" defer></script>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function alternarPapel(novoPapel) {
+            if (novoPapel === 'aluno') {
+                navigateTo('areaAluno.html');
+            } else if (novoPapel === 'instrutor') {
+                navigateTo('areaInstrutor.html');
+            }
+        }
+
+        function gerarRelatorios() {
+            if (typeof mostrarNotificacao === 'function') {
+                mostrarNotificacao('Relatórios gerados com sucesso!', 'success');
+            } else {
+                alert('Relatórios gerados com sucesso!');
+            }
+        }
+
+        // Ao carregar a página, verifica se o usuário tem múltiplos papéis
+        document.addEventListener('DOMContentLoaded', function() {
+            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+            if (usuario && usuario.papeis && usuario.papeis.length > 1) {
+                document.getElementById('papelSelector').style.display = 'block';
+                document.getElementById('papelAtualTexto').textContent = 'Instrutor';
+            }
+        });
+    </script>
+</body>
+
+</html>

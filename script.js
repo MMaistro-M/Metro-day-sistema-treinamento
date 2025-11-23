@@ -1,10 +1,10 @@
 // util: debounce
 function debounce(fn, wait = 250) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn.apply(null, args), wait);
-  };
+    let t;
+    return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(null, args), wait);
+    };
 }
 
 // Sistema de Navegação para páginas separadas
@@ -15,13 +15,13 @@ function navigateTo(page) {
 // Selecionar tipo de usuário no login (mantém estado)
 function selectUserType(type) {
     ['aluno','instrutor','monitor','admin'].forEach(t => {
-      const el = document.getElementById(t + 'Type');
-      if (el) el.classList.remove('active');
+        const el = document.getElementById(t + 'Type');
+        if (el) el.classList.remove('active');
     });
     const chosen = document.getElementById(type + 'Type');
     if (chosen) {
-      chosen.classList.add('active');
-      sessionStorage.setItem('userType', chosen.id);
+        chosen.classList.add('active');
+        sessionStorage.setItem('userType', chosen.id);
     }
 }
 
@@ -32,22 +32,55 @@ document.addEventListener('DOMContentLoaded', function() {
         loginFormEl.addEventListener('submit', function(e) {
             e.preventDefault();
             const userTypeEl = document.querySelector('.user-type.active');
-            const userType = userTypeEl ? userTypeEl.id : 'alunoType';
+            const userType = userTypeEl ? userTypeEl.id.replace('Type', '') : 'aluno';
             
             showLoading(this.querySelector('button'));
             
             setTimeout(() => {
-                if (userType === 'alunoType') {
-                    alert('Login de aluno realizado com sucesso!');
-                    navigateTo('areaAluno.html');
-                } else if (userType === 'instrutorType') {
-                    alert('Login de instrutor realizado com sucesso!');
-                    navigateTo('registroPresenca.html');
-                } else if (userType === 'monitorType') {
-                    alert('Login de monitor realizado com sucesso!');
-                    navigateTo('index.html');
+                // Simulando um usuário com múltiplos papéis
+                // Em um sistema real, isso viria do backend
+                let usuario;
+                
+                if (userType === 'instrutor') {
+                    usuario = {
+                        nome: "Carlos Oliveira",
+                        rgm: "987.654.321-00",
+                        email: "carlos.oliveira@metrosp.com",
+                        papeis: ['instrutor', 'aluno'], // Este usuário é instrutor E aluno
+                        papelAtual: userType
+                    };
+                } else if (userType === 'aluno') {
+                    usuario = {
+                        nome: "João Silva",
+                        rgm: "123.456.789-00",
+                        email: "joao.silva@email.com",
+                        papeis: ['aluno'], // Apenas aluno
+                        papelAtual: userType
+                    };
                 } else {
-                    navigateTo('loginAdm.html');
+                    usuario = {
+                        nome: "Monitor",
+                        rgm: "111.222.333-44",
+                        email: "monitor@metrosp.com",
+                        papeis: ['monitor'],
+                        papelAtual: userType
+                    };
+                }
+                
+                // Salva no sessionStorage
+                sessionStorage.setItem('usuario', JSON.stringify(usuario));
+                sessionStorage.setItem('papelAtual', userType);
+                
+                // Redireciona baseado no papel escolhido
+                if (userType === 'aluno') {
+                    alert('Login como aluno realizado com sucesso!');
+                    navigateTo('areaAluno.html');
+                } else if (userType === 'instrutor') {
+                    alert('Login como instrutor realizado com sucesso!');
+                    navigateTo('areaInstrutor.html');
+                } else if (userType === 'monitor') {
+                    alert('Login como monitor realizado com sucesso!');
+                    navigateTo('index.html');
                 }
             }, 1000);
         });
@@ -65,6 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
             
             setTimeout(() => {
                 if (user === 'admin' && password === 'admin123') {
+                    // Usuário admin tem múltiplos papéis
+                    const usuario = {
+                        nome: "Administrador",
+                        rgm: "000.000.000-00",
+                        email: "admin@metrosp.com",
+                        papeis: ['instrutor', 'aluno', 'admin'],
+                        papelAtual: 'admin'
+                    };
+                    
+                    sessionStorage.setItem('usuario', JSON.stringify(usuario));
+                    sessionStorage.setItem('papelAtual', 'admin');
+                    
                     alert('Login administrativo realizado com sucesso!');
                     navigateTo('dashBoardAdm.html');
                 } else {
@@ -74,7 +119,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         });
     }
+     // Configurar botão de gerar relatório
+       const btnGerarRelatorio = document.getElementById('btnGerarRelatorio');
+    if (btnGerarRelatorio) {
+        btnGerarRelatorio.addEventListener('click', function(e) {
+            e.preventDefault();
+            gerarRelatorioPresenca();
+        });
+    }
 });
+
+// Função para alternar entre papéis
+function alternarPapel(novoPapel) {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+    if (usuario && usuario.papeis.includes(novoPapel)) {
+        sessionStorage.setItem('papelAtual', novoPapel);
+        
+        if (novoPapel === 'aluno') {
+            navigateTo('areaAluno.html');
+        } else if (novoPapel === 'instrutor') {
+            navigateTo('areaInstrutor.html');
+        } else if (novoPapel === 'monitor') {
+            navigateTo('index.html');
+        }
+    } else {
+        alert('Você não tem permissão para acessar este papel.');
+    }
+}
+
+// Função para verificar papéis disponíveis
+function getPapeisDisponiveis() {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+    return usuario ? usuario.papeis : [];
+}
+
+// Função para obter papel atual
+function getPapelAtual() {
+    return sessionStorage.getItem('papelAtual') || 'aluno';
+}
 
 // Loading states
 function showLoading(button) {
@@ -94,8 +176,8 @@ function verDetalhes(curso) {
     const targetId = 'detalhes-' + curso;
     document.querySelectorAll('.curso-detalhes').forEach(detalhe => {
         if (detalhe.id !== targetId) {
-          detalhe.style.display = 'none';
-          detalhe.setAttribute('aria-hidden','true');
+            detalhe.style.display = 'none';
+            detalhe.setAttribute('aria-hidden','true');
         }
     });
     const bloco = document.getElementById(targetId);
@@ -116,9 +198,9 @@ function inscreverCurso(curso) {
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('btn-assinar') || e.target.closest('.btn-assinar')) {
         const btn = e.target.classList.contains('btn-assinar') ? e.target : e.target.closest('.btn-assinar');
-        const RGM = btn.getAttribute('data-RGM');
-        if (RGM) {
-            abrirPadAssinatura(RGM);
+        const rgm = btn.getAttribute('data-rgm');
+        if (rgm) {
+            abrirPadAssinatura(rgm);
         }
     }
 });
@@ -126,65 +208,65 @@ document.addEventListener('click', function(e) {
 // Canvas assinatura simples (mouse e touch)
 let sig = { drawing:false, ctx:null, canvas:null, last:{x:0,y:0} };
 function initSignaturePad() {
-  const canvas = document.getElementById('signature-pad');
-  if (!canvas) return;
-  
-  const ctx = canvas.getContext('2d');
-  ctx.lineWidth = 2;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.strokeStyle = '#000000';
-  sig = { drawing:false, ctx, canvas, last:{x:0,y:0} };
-  
-  const getPos = (e) => {
-    const rect = canvas.getBoundingClientRect();
-    if (e.touches && e.touches[0]) {
-      return { 
-        x: e.touches[0].clientX - rect.left, 
-        y: e.touches[0].clientY - rect.top 
-      };
-    }
-    return { 
-      x: e.clientX - rect.left, 
-      y: e.clientY - rect.top 
+    const canvas = document.getElementById('signature-pad');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#000000';
+    sig = { drawing:false, ctx, canvas, last:{x:0,y:0} };
+    
+    const getPos = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        if (e.touches && e.touches[0]) {
+            return { 
+                x: e.touches[0].clientX - rect.left, 
+                y: e.touches[0].clientY - rect.top 
+            };
+        }
+        return { 
+            x: e.clientX - rect.left, 
+            y: e.clientY - rect.top 
+        };
     };
-  };
-  
-  const start = (e) => {
-    sig.drawing = true;
-    sig.last = getPos(e);
-  };
-  
-  const move = (e) => {
-    if (!sig.drawing) return;
-    const p = getPos(e);
-    sig.ctx.beginPath();
-    sig.ctx.moveTo(sig.last.x, sig.last.y);
-    sig.ctx.lineTo(p.x, p.y);
-    sig.ctx.stroke();
-    sig.last = p;
-    e.preventDefault();
-  };
-  
-  const end = () => sig.drawing = false;
-  
-  // Remove event listeners antigos
-  canvas.removeEventListener('mousedown', start);
-  canvas.removeEventListener('mousemove', move);
-  canvas.removeEventListener('mouseup', end);
-  canvas.removeEventListener('mouseleave', end);
-  canvas.removeEventListener('touchstart', start);
-  canvas.removeEventListener('touchmove', move);
-  canvas.removeEventListener('touchend', end);
-  
-  // Adiciona novos event listeners
-  canvas.addEventListener('mousedown', start);
-  canvas.addEventListener('mousemove', move);
-  canvas.addEventListener('mouseup', end);
-  canvas.addEventListener('mouseleave', end);
-  canvas.addEventListener('touchstart', start, {passive:false});
-  canvas.addEventListener('touchmove', move, {passive:false});
-  canvas.addEventListener('touchend', end);
+    
+    const start = (e) => {
+        sig.drawing = true;
+        sig.last = getPos(e);
+    };
+    
+    const move = (e) => {
+        if (!sig.drawing) return;
+        const p = getPos(e);
+        sig.ctx.beginPath();
+        sig.ctx.moveTo(sig.last.x, sig.last.y);
+        sig.ctx.lineTo(p.x, p.y);
+        sig.ctx.stroke();
+        sig.last = p;
+        e.preventDefault();
+    };
+    
+    const end = () => sig.drawing = false;
+    
+    // Remove event listeners antigos
+    canvas.removeEventListener('mousedown', start);
+    canvas.removeEventListener('mousemove', move);
+    canvas.removeEventListener('mouseup', end);
+    canvas.removeEventListener('mouseleave', end);
+    canvas.removeEventListener('touchstart', start);
+    canvas.removeEventListener('touchmove', move);
+    canvas.removeEventListener('touchend', end);
+    
+    // Adiciona novos event listeners
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+    canvas.addEventListener('touchstart', start, {passive:false});
+    canvas.addEventListener('touchmove', move, {passive:false});
+    canvas.addEventListener('touchend', end);
 }
 
 function limparAssinatura() {
@@ -198,21 +280,19 @@ function salvarAssinatura() {
     const container = document.querySelector('.signature-pad-container');
     if (!container) return;
     
-    const RGM = container.getAttribute('data-RGM');
-    const aluno = alunos.find(a => a.RGM === RGM);
+    const rgm = container.getAttribute('data-rgm');
+    const aluno = alunos.find(a => a.rgm === rgm);
     
     if (aluno) {
-        const checkbox = document.querySelector(`.checkbox-presenca[data-RGM="${RGM}"]`);
+        const checkbox = document.querySelector(`.checkbox-presenca[data-rgm="${rgm}"]`);
         
         if (checkbox && checkbox.checked) {
             alert(`Assinatura salva com sucesso para ${aluno.nome}! Presença registrada.`);
             
-            const alunoIndex = alunos.findIndex(a => a.RGM === RGM);
+            const alunoIndex = alunos.findIndex(a => a.rgm === rgm);
             if (alunoIndex !== -1) {
-                alunos[alunoIndex].presencas++;
-                if (alunos[alunoIndex].presencas > alunos[alunoIndex].totalAulas) {
-                    alunos[alunoIndex].presencas = alunos[alunoIndex].totalAulas;
-                }
+                // Atualiza presença na tabela
+                atualizarPresencaNaTabela(rgm, true);
             }
         } else {
             alert('Para registrar a assinatura, é necessário marcar a presença do aluno.');
@@ -232,29 +312,29 @@ function cancelarAssinatura() {
     limparAssinatura();
 }
 
-//Filtros & Busca
+// Filtros & Busca
 document.addEventListener('DOMContentLoaded', function() {
     const filterCargoEl = document.getElementById('filterCargo');
     const filterStatusEl = document.getElementById('filterStatus');
     const searchCourseEl = document.getElementById('searchCourse');
 
     function applyCourseFilters() {
-      const cargo = (filterCargoEl?.value || '').toLowerCase();
-      const status = (filterStatusEl?.value || '').toLowerCase();
-      const term = (searchCourseEl?.value || '').toLowerCase().trim();
-      const cards = document.querySelectorAll('.card-custom[data-title]');
+        const cargo = (filterCargoEl?.value || '').toLowerCase();
+        const status = (filterStatusEl?.value || '').toLowerCase();
+        const term = (searchCourseEl?.value || '').toLowerCase().trim();
+        const cards = document.querySelectorAll('.card-custom[data-title]');
 
-      cards.forEach(card => {
-        const title = (card.dataset.title || '').toLowerCase();
-        const cargos = (card.dataset.cargo || '').toLowerCase().split(',');
-        const st = (card.dataset.status || '').toLowerCase();
+        cards.forEach(card => {
+            const title = (card.dataset.title || '').toLowerCase();
+            const cargos = (card.dataset.cargo || '').toLowerCase().split(',');
+            const st = (card.dataset.status || '').toLowerCase();
 
-        const okCargo = !cargo || cargos.includes(cargo);
-        const okStatus = !status || st === status;
-        const okTerm = !term || title.includes(term);
+            const okCargo = !cargo || cargos.includes(cargo);
+            const okStatus = !status || st === status;
+            const okTerm = !term || title.includes(term);
 
-        card.style.display = (okCargo && okStatus && okTerm) ? '' : 'none';
-      });
+            card.style.display = (okCargo && okStatus && okTerm) ? '' : 'none';
+        });
     }
 
     if (filterCargoEl) filterCargoEl.addEventListener('change', applyCourseFilters);
@@ -267,25 +347,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Estado inicial: restaura tipo de usuário 
 document.addEventListener('DOMContentLoaded', function() {
-  // restaura tipo de usuário
-  const savedType = sessionStorage.getItem('userType');
-  if (savedType) {
-    ['aluno','instrutor','monitor','admin'].forEach(t => {
-      const el = document.getElementById(t + 'Type');
-      if (el) el.classList.remove('active');
-    });
-    const el = document.getElementById(savedType);
-    if (el) el.classList.add('active');
-  }
+    // restaura tipo de usuário
+    const savedType = sessionStorage.getItem('userType');
+    if (savedType) {
+        ['aluno','instrutor','monitor','admin'].forEach(t => {
+            const el = document.getElementById(t + 'Type');
+            if (el) el.classList.remove('active');
+        });
+        const el = document.getElementById(savedType);
+        if (el) el.classList.add('active');
+    }
 });
 
 // Mock de alunos ATUALIZADO
 let alunos = [
-    { matricula: "123456", nome: "João Silva", RGM: "123.456.789-00", presencas: 3, faltas: 0, totalAulas: 5 },
-    { matricula: "234567", nome: "Maria Santos", RGM: "234.567.890-11", presencas: 2, faltas: 1, totalAulas: 5 },
-    { matricula: "345678", nome: "Pedro Costa", RGM: "345.678.901-22", presencas: 4, faltas: 0, totalAulas: 5 },
-    { matricula: "456789", nome: "Ana Oliveira", RGM: "456.789.012-33", presencas: 5, faltas: 0, totalAulas: 5 },
-    { matricula: "567890", nome: "Carlos Souza", RGM: "567.890.123-44", presencas: 1, faltas: 4, totalAulas: 5 }
+    { matricula: "123456", nome: "João Silva", rgm: "123.456.789-00", presencas: 3, faltas: 0, totalAulas: 5 },
+    { matricula: "234567", nome: "Maria Santos", rgm: "234.567.890-11", presencas: 2, faltas: 1, totalAulas: 5 },
+    { matricula: "345678", nome: "Pedro Costa", rgm: "345.678.901-22", presencas: 4, faltas: 0, totalAulas: 5 },
+    { matricula: "456789", nome: "Ana Oliveira", rgm: "456.789.012-33", presencas: 5, faltas: 0, totalAulas: 5 },
+    { matricula: "567890", nome: "Carlos Souza", rgm: "567.890.123-44", presencas: 1, faltas: 4, totalAulas: 5 }
 ];
 
 // SISTEMA DE REGISTRO DE PRESENÇA - NOVAS FUNÇÕES
@@ -337,12 +417,12 @@ function carregarAlunosTurma(turmaId) {
         tr.innerHTML = `
             <td>${aluno.matricula}</td>
             <td>${aluno.nome}</td>
-            <td>${aluno.RGM}</td>
+            <td>${aluno.rgm}</td>
             <td class="text-center">
-                <input type="checkbox" class="checkbox-presenca" data-RGM="${aluno.RGM}" ${aluno.presencas > 0 ? 'checked' : ''}>
+                <input type="checkbox" class="checkbox-presenca" data-rgm="${aluno.rgm}" ${aluno.presencas > 0 ? 'checked' : ''}>
             </td>
             <td class="text-center">
-                <button class="btn btn-sm btn-metro btn-assinar" data-RGM="${aluno.RGM}">
+                <button class="btn btn-sm btn-metro btn-assinar" data-rgm="${aluno.rgm}">
                     <i class="fas fa-signature"></i> Assinar
                 </button>
             </td>
@@ -352,32 +432,52 @@ function carregarAlunosTurma(turmaId) {
     
     document.querySelectorAll('.checkbox-presenca').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-            const RGM = this.getAttribute('data-RGM');
-            atualizarPresencaAluno(RGM, this.checked);
+            const rgm = this.getAttribute('data-rgm');
+            atualizarPresencaAluno(rgm, this.checked);
         });
     });
 }
 
 // Atualizar presença do aluno
-function atualizarPresencaAluno(RGM, presente) {
-    const alunoIndex = alunos.findIndex(a => a.RGM === RGM);
+function atualizarPresencaAluno(rgm, presente) {
+    const alunoIndex = alunos.findIndex(a => a.rgm === rgm);
     if (alunoIndex !== -1) {
+        if (presente) {
+            alunos[alunoIndex].presencas++;
+            if (alunos[alunoIndex].presencas > alunos[alunoIndex].totalAulas) {
+                alunos[alunoIndex].presencas = alunos[alunoIndex].totalAulas;
+            }
+        } else {
+            alunos[alunoIndex].presencas = Math.max(0, alunos[alunoIndex].presencas - 1);
+        }
+        alunos[alunoIndex].faltas = alunos[alunoIndex].totalAulas - alunos[alunoIndex].presencas;
+        
         console.log(`Aluno ${alunos[alunoIndex].nome}: ${presente ? 'Presente' : 'Falta'}`);
+        console.log(`Presenças: ${alunos[alunoIndex].presencas}, Faltas: ${alunos[alunoIndex].faltas}`);
+    }
+}
+
+// Atualizar presença na tabela visualmente
+function atualizarPresencaNaTabela(rgm, presente) {
+    const alunoIndex = alunos.findIndex(a => a.rgm === rgm);
+    if (alunoIndex !== -1) {
+        // A tabela será atualizada quando o relatório for gerado novamente
+        console.log(`Presença atualizada para ${alunos[alunoIndex].nome}: ${presente ? 'Presente' : 'Falta'}`);
     }
 }
 
 // Abrir pad de assinatura para um aluno específico
-function abrirPadAssinatura(RGM) {
-    const aluno = alunos.find(a => a.RGM === RGM);
+function abrirPadAssinatura(rgm) {
+    const aluno = alunos.find(a => a.rgm === rgm);
     if (aluno) {
         const nomeElement = document.getElementById('alunoAssinaturaNome');
-        const RGMElement = document.getElementById('alunoAssinaturaRGM');
+        const rgmElement = document.getElementById('alunoAssinaturaRGM');
         const container = document.querySelector('.signature-pad-container');
         
         if (nomeElement) nomeElement.textContent = aluno.nome;
-        if (RGMElement) RGMElement.textContent = aluno.RGM;
+        if (rgmElement) rgmElement.textContent = aluno.rgm;
         if (container) {
-            container.setAttribute('data-RGM', RGM);
+            container.setAttribute('data-rgm', rgm);
             container.style.display = 'block';
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -385,25 +485,25 @@ function abrirPadAssinatura(RGM) {
     }
 }
 
-// GERAR RELATÓRIO DE PRESENÇA - VERSÃO SIMPLIFICADA E FUNCIONAL
+// GERAR RELATÓRIO DE PRESENÇA - VERSÃO CORRIGIDA
 function gerarRelatorioPresenca() {
-    console.log('=== INICIANDO GERAR RELATÓRIO ===');
+    console.log('Iniciando geracao de relatorio');
     
     // Verifica se estamos na página correta
     const turmaSelect = document.getElementById('selectTurma');
     if (!turmaSelect) {
-        console.error('❌ selectTurma não encontrado');
-        alert('Erro: Não foi possível encontrar a seleção de turma.');
+        console.error('selectTurma nao encontrado');
+        alert('Erro: Nao foi possivel encontrar a selecao de turma.');
         return;
     }
     
     if (!turmaSelect.value) {
-        alert('⚠️ Selecione uma turma primeiro.');
+        alert('Selecione uma turma primeiro.');
         return;
     }
     
     const turma = turmaSelect.options[turmaSelect.selectedIndex].text;
-    console.log(`📊 Gerando relatório para: ${turma}`);
+    console.log(`Gerando relatorio para: ${turma}`);
 
     // Cria o HTML do relatório
     const relatorioHTML = criarHTMLRelatorio(turma);
@@ -421,7 +521,7 @@ function gerarRelatorioPresenca() {
     
     if (parentElement) {
         parentElement.insertAdjacentHTML('beforeend', relatorioHTML);
-        console.log('✅ Relatório inserido com sucesso');
+        console.log('Relatorio inserido com sucesso');
         
         // Scroll para o relatório
         const novoRelatorio = document.querySelector('.relatorio-presenca');
@@ -429,10 +529,10 @@ function gerarRelatorioPresenca() {
             novoRelatorio.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         
-        mostrarNotificacao('📊 Relatório gerado com sucesso!', 'success');
+        mostrarNotificacao('Relatorio gerado com sucesso!', 'success');
     } else {
-        console.error('❌ Não foi possível encontrar local para inserir relatório');
-        alert('Erro ao exibir relatório.');
+        console.error('Nao foi possivel encontrar local para inserir relatorio');
+        alert('Erro ao exibir relatorio.');
     }
 }
 
@@ -441,21 +541,21 @@ function criarHTMLRelatorio(turma) {
     let tabelaHTML = '';
     
     alunos.forEach(aluno => {
-        const faltas = aluno.totalAulas - aluno.presencas;
+        const faltas = aluno.faltas;
         const percentual = aluno.totalAulas > 0 ? ((aluno.presencas / aluno.totalAulas) * 100).toFixed(2) : '0.00';
         const percentualClass = percentual >= 80 ? 'percentual-alto' : 
                                percentual >= 60 ? 'percentual-medio' : 'percentual-baixo';
         
         let status = '';
         if (percentual >= 80) status = '<span class="badge bg-success">Aprovado</span>';
-        else if (percentual >= 60) status = '<span class="badge bg-warning">Atenção</span>';
+        else if (percentual >= 60) status = '<span class="badge bg-warning">Atencao</span>';
         else status = '<span class="badge bg-danger">Reprovado</span>';
         
         tabelaHTML += `
             <tr>
                 <td>${aluno.matricula}</td>
                 <td>${aluno.nome}</td>
-                <td>${aluno.RGM}</td>
+                <td>${aluno.rgm}</td>
                 <td class="text-center">${aluno.presencas}</td>
                 <td class="text-center">${faltas}</td>
                 <td class="text-center">${aluno.totalAulas}</td>
@@ -468,7 +568,7 @@ function criarHTMLRelatorio(turma) {
     // Calcula totais
     const totalPresencas = alunos.reduce((sum, aluno) => sum + aluno.presencas, 0);
     const totalAulas = alunos.reduce((sum, aluno) => sum + aluno.totalAulas, 0);
-    const totalFaltas = totalAulas - totalPresencas;
+    const totalFaltas = alunos.reduce((sum, aluno) => sum + aluno.faltas, 0);
     const percentualGeral = totalAulas > 0 ? ((totalPresencas / totalAulas) * 100).toFixed(2) : '0.00';
 
     return `
@@ -477,7 +577,7 @@ function criarHTMLRelatorio(turma) {
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h3 class="mb-0">
                         <i class="fas fa-chart-pie text-primary"></i> 
-                        Relatório de Presença - ${turma}
+                        Relatorio de Presenca - ${turma}
                     </h3>
                     <button class="btn btn-sm btn-outline-secondary" onclick="fecharRelatorio()">
                         <i class="fas fa-times"></i>
@@ -488,13 +588,13 @@ function criarHTMLRelatorio(turma) {
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="table-dark">
                             <tr>
-                                <th>Matrícula</th>
+                                <th>Matricula</th>
                                 <th>Nome</th>
                                 <th>RGM</th>
-                                <th class="text-center">Presenças</th>
+                                <th class="text-center">Presencas</th>
                                 <th class="text-center">Faltas</th>
                                 <th class="text-center">Total Aulas</th>
-                                <th class="text-center">% Presença</th>
+                                <th class="text-center">% Presenca</th>
                                 <th class="text-center">Status</th>
                             </tr>
                         </thead>
@@ -522,7 +622,7 @@ function criarHTMLRelatorio(turma) {
                         <i class="fas fa-print"></i> Imprimir
                     </button>
                     <button class="btn btn-secondary" onclick="fecharRelatorio()">
-                        <i class="fas fa-times"></i> Fechar Relatório
+                        <i class="fas fa-times"></i> Fechar Relatorio
                     </button>
                 </div>
             </div>
@@ -535,7 +635,7 @@ function fecharRelatorio() {
     const relatorio = document.querySelector('.relatorio-presenca');
     if (relatorio) {
         relatorio.remove();
-        mostrarNotificacao('Relatório fechado', 'info');
+        mostrarNotificacao('Relatorio fechado', 'info');
     }
 }
 
@@ -543,7 +643,7 @@ function fecharRelatorio() {
 function imprimirRelatorio() {
     const relatorio = document.querySelector('.relatorio-presenca');
     if (!relatorio) {
-        alert('Gere um relatório primeiro.');
+        alert('Gere um relatorio primeiro.');
         return;
     }
     
@@ -554,7 +654,7 @@ function imprimirRelatorio() {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Relatório de Presença - Metrô SP</title>
+            <title>Relatorio de Presenca - Metro SP</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
             <style>
@@ -590,29 +690,29 @@ function imprimirRelatorio() {
 // Função para exportar relatório
 function exportarRelatorio() {
     if (!document.querySelector('.relatorio-presenca')) {
-        alert('Gere um relatório primeiro.');
+        alert('Gere um relatorio primeiro.');
         return;
     }
     
     // Simulação de exportação
-    mostrarNotificacao('📄 Preparando relatório para download...', 'info');
+    mostrarNotificacao('Preparando relatorio para download...', 'info');
     
     setTimeout(() => {
-        mostrarNotificacao('✅ Relatório exportado com sucesso!', 'success');
+        mostrarNotificacao('Relatorio exportado com sucesso!', 'success');
         // Em produção, aqui faria o download real do PDF
     }, 2000);
 }
 
 // Inicialização da página de registro de presença
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== INICIALIZANDO PÁGINA ===');
+    console.log('Inicializando pagina');
     
     // Verifica se estamos na página de registro de presença
     const isRegistroPage = window.location.href.includes('registroPresenca.html') || 
                           document.querySelector('table tbody');
     
     if (isRegistroPage) {
-        console.log('📋 Página de registro de presença detectada');
+        console.log('Pagina de registro de presenca detectada');
         inicializarPaginaPresenca();
         
         // Configura event listeners para turma e data
@@ -725,7 +825,6 @@ function mostrarNotificacao(mensagem, tipo = 'info') {
     }, 5000);
 }
 
-
 // Adicionar CSS para as notificações
 const notificationStyles = document.createElement('style');
 notificationStyles.textContent = `
@@ -764,4 +863,3 @@ if (typeof bootstrap !== 'undefined') {
         });
     });
 }
-

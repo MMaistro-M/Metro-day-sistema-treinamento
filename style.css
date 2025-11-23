@@ -687,3 +687,55 @@ body {
   font-weight: 700;
   font-size: 1.25rem;
 }
+
+/* Seletor de Papéis */
+.papel-selector .dropdown-toggle {
+    border-color: rgba(255,255,255,0.5);
+    color: white;
+    min-width: 140px;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+.papel-selector .dropdown-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: white;
+}
+
+.papel-selector .dropdown-menu {
+    min-width: 160px;
+}
+
+.papel-selector .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.5rem 1rem;
+}
+
+.papel-selector .dropdown-item:hover {
+    background-color: var(--azul-claro);
+    color: white;
+}
+
+.btn-outline-metro {
+    border-color: var(--azul-medio);
+    color: var(--azul-medio);
+}
+
+.btn-outline-metro:hover {
+    background-color: var(--azul-medio);
+    color: white;
+}
+
+/* Responsividade para o seletor */
+@media (max-width: 768px) {
+    .papel-selector {
+        margin-top: 10px;
+    }
+    
+    .papel-selector .dropdown-toggle {
+        min-width: 120px;
+        font-size: 0.8rem;
+    }
+}

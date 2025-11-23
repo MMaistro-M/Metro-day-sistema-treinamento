@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Controle de Treinamentos - Metrô SP</title>
+    <title>Cursos Disponíveis - Sistema de Treinamentos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -30,20 +30,37 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-12">
-                        <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
-                            <a class="nav-link" href="login.html">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                            <a class="nav-link active" href="index.html">
-                                <i class="fas fa-graduation-cap"></i> Cursos
-                            </a>
-                            <a class="nav-link" href="areaAluno.html">
-                                <i class="fas fa-user-graduate"></i> Área do Aluno
-                            </a>
-                            <a class="nav-link" href="dashBoardAdm.html">
-                                <i class="fas fa-cog"></i> Administração
-                            </a>
-                        </nav>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                                <a class="nav-link" href="login.html">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                                <a class="nav-link active" href="index.html">
+                                    <i class="fas fa-graduation-cap"></i> Cursos
+                                </a>
+                                <a class="nav-link" href="areaAluno.html">
+                                    <i class="fas fa-user-graduate"></i> Área do Aluno
+                                </a>
+                            </nav>
+                            
+                            <!-- Seletor de Papéis -->
+                            <div class="papel-selector ms-3" id="papelSelector" style="display: none;">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user-shield"></i> 
+                                        <span id="papelAtualTexto">Aluno</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="papeisDisponiveis">
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('aluno')">
+                                            <i class="fas fa-user-graduate"></i> Aluno
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('instrutor')">
+                                            <i class="fas fa-chalkboard-teacher"></i> Instrutor
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,9 +69,16 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="container-fluid">
-                <h2 class="mb-4">
-                    <i class="fas fa-graduation-cap"></i> Cursos Disponíveis
-                </h2>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-graduation-cap"></i> Cursos Disponíveis
+                    </h2>
+                    <div>
+                        <button class="btn btn-metro" onclick="navigateTo('areaAluno.html')">
+                            <i class="fas fa-user-graduate"></i> Minha Área
+                        </button>
+                    </div>
+                </div>
                 
                 <!-- Filtros -->
                 <div class="row mb-4">
@@ -154,30 +178,61 @@
                     </div>
                     
                     <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
-                        <div class="card-custom" data-title="Liderança e Gestão de Equipes" data-cargo="supervisor,gerencial" data-status="concluido">
+                        <div class="card-custom" data-title="NR33 - Espaços Confinados" data-cargo="operacional,tecnico" data-status="aberto">
                             <h3>
-                                <i class="fas fa-users"></i> Liderança e Gestão de Equipes 
-                                <span class="badge-metro badge-info">Restrito</span>
+                                <i class="fas fa-shield-alt"></i> NR33 - Espaços Confinados 
+                                <span class="badge-metro badge-success">Disponível</span>
                             </h3>
-                            <p><strong>Código:</strong> LID-TURMA-0823</p>
-                            <p>Desenvolvimento de competências gerenciais e liderança para supervisores e gerentes.</p>
-                            <p><strong>Carga horária:</strong> 30 horas</p>
-                            <p><strong>Instrutor:</strong> Dr. Roberto Almeida</p>
-                            <p><strong>Restrição:</strong> Cargos supervisorios e gerenciais</p>
-                            <button class="btn btn-metro w-100" onclick="verDetalhes('lideranca')">
+                            <p><strong>Código:</strong> NR33-TURMA-0923</p>
+                            <p>Capacitação para trabalho seguro em espaços confinados de acordo com a NR33.</p>
+                            <p><strong>Carga horária:</strong> 40 horas</p>
+                            <p><strong>Instrutor:</strong> Eng. Fernando Lima</p>
+                            <p><strong>Restrição:</strong> Cargos operacionais e técnicos</p>
+                            <button class="btn btn-metro w-100" onclick="verDetalhes('nr33')">
                                 <i class="fas fa-info-circle"></i> Ver Detalhes
                             </button>
                             
-                            <div id="detalhes-lideranca" class="curso-detalhes mt-3" style="display: none;">
+                            <div id="detalhes-nr33" class="curso-detalhes mt-3" style="display: none;">
                                 <h4>Conteúdo Programático</h4>
                                 <ul>
-                                    <li>Papel do líder na organização</li>
-                                    <li>Comunicação eficaz</li>
-                                    <li>Gestão de conflitos</li>
-                                    <li>Feedback e desenvolvimento de equipes</li>
-                                    <li>Planejamento e delegação de tarefas</li>
+                                    <li>Definições e reconhecimento de espaços confinados</li>
+                                    <li>Riscos e medidas de controle</li>
+                                    <li>Funcionamento de equipamentos</li>
+                                    <li>Noções de resgate e primeiros socorros</li>
+                                    <li>Permissão de Entrada e Trabalho</li>
                                 </ul>
-                                <button class="btn btn-metro w-100 mt-3" onclick="inscreverCurso('Liderança e Gestão de Equipes')">
+                                <button class="btn btn-metro w-100 mt-3" onclick="inscreverCurso('NR33 - Espaços Confinados')">
+                                    <i class="fas fa-check"></i> Inscrever-se
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+                        <div class="card-custom" data-title="Primeiros Socorros" data-cargo="operacional,tecnico,supervisor" data-status="aberto">
+                            <h3>
+                                <i class="fas fa-first-aid"></i> Primeiros Socorros 
+                                <span class="badge-metro badge-success">Disponível</span>
+                            </h3>
+                            <p><strong>Código:</strong> PS-TURMA-0923</p>
+                            <p>Treinamento em procedimentos básicos de primeiros socorros para situações de emergência.</p>
+                            <p><strong>Carga horária:</strong> 20 horas</p>
+                            <p><strong>Instrutor:</strong> Enf. Ana Costa</p>
+                            <p><strong>Restrição:</strong> Todos os cargos</p>
+                            <button class="btn btn-metro w-100" onclick="verDetalhes('primeiros-socorros')">
+                                <i class="fas fa-info-circle"></i> Ver Detalhes
+                            </button>
+                            
+                            <div id="detalhes-primeiros-socorros" class="curso-detalhes mt-3" style="display: none;">
+                                <h4>Conteúdo Programático</h4>
+                                <ul>
+                                    <li>Avaliação inicial da vítima</li>
+                                    <li>Suporte básico de vida</li>
+                                    <li>Controle de hemorragias</li>
+                                    <li>Imobilizações e curativos</li>
+                                    <li>Queimaduras e emergências médicas</li>
+                                </ul>
+                                <button class="btn btn-metro w-100 mt-3" onclick="inscreverCurso('Primeiros Socorros')">
                                     <i class="fas fa-check"></i> Inscrever-se
                                 </button>
                             </div>
@@ -199,5 +254,51 @@
     </script>
     <!-- Embed Im: widget de acessibilidade -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function alternarPapel(novoPapel) {
+            if (novoPapel === 'aluno') {
+                navigateTo('areaAluno.html');
+            } else if (novoPapel === 'instrutor') {
+                navigateTo('areaInstrutor.html');
+            }
+        }
+
+        // Adicionar curso NR33 aos detalhes
+        function verDetalhes(curso) {
+            const targetId = 'detalhes-' + curso;
+            document.querySelectorAll('.curso-detalhes').forEach(detalhe => {
+                if (detalhe.id !== targetId) {
+                    detalhe.style.display = 'none';
+                }
+            });
+            const bloco = document.getElementById(targetId);
+            if (bloco) {
+                const willShow = bloco.style.display !== 'block';
+                bloco.style.display = willShow ? 'block' : 'none';
+                if (willShow) bloco.scrollIntoView({behavior:'smooth', block:'start'});
+            }
+        }
+
+        function inscreverCurso(curso) {
+            alert(`Inscrição no curso "${curso}" realizada com sucesso!`);
+            if (typeof mostrarNotificacao === 'function') {
+                mostrarNotificacao(`Inscrição no curso "${curso}" realizada com sucesso!`, 'success');
+            }
+        }
+
+        // Ao carregar a página, verifica se o usuário tem múltiplos papéis
+        document.addEventListener('DOMContentLoaded', function() {
+            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+            if (usuario && usuario.papeis && usuario.papeis.length > 1) {
+                document.getElementById('papelSelector').style.display = 'block';
+                document.getElementById('papelAtualTexto').textContent = 'Aluno';
+            }
+        });
+    </script>
 </body>
 </html>

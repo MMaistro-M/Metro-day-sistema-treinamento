@@ -32,21 +32,34 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-12">
-                        <nav
-                            class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
-                            <a class="nav-link" href="login.html">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                            <a class="nav-link" href="index.html">
-                                <i class="fas fa-graduation-cap"></i> Cursos
-                            </a>
-                            <a class="nav-link active" href="areaAluno.html">
-                                <i class="fas fa-user-graduate"></i> Área do Aluno
-                            </a>
-                            <a class="nav-link" href="dashBoardAdm.html">
-                                <i class="fas fa-cog"></i> Administração
-                            </a>
-                        </nav>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <nav class="nav nav-custom justify-content-lg-end justify-content-md-center justify-content-start flex-nowrap overflow-auto">
+                                <a class="nav-link" href="login.html">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </a>
+                                <a class="nav-link active" href="areaAluno.html">
+                                    <i class="fas fa-user-graduate"></i> Área do Aluno
+                                </a>
+                            </nav>
+                            
+                            <!-- Seletor de Papéis -->
+                            <div class="papel-selector ms-3" id="papelSelector" style="display: none;">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user-shield"></i> 
+                                        <span id="papelAtualTexto">Aluno</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="papeisDisponiveis">
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('aluno')">
+                                            <i class="fas fa-user-graduate"></i> Aluno
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="alternarPapel('instrutor')">
+                                            <i class="fas fa-chalkboard-teacher"></i> Instrutor
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,9 +68,14 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="container-fluid">
-                <h2 class="mb-4">
-                    <i class="fas fa-user-graduate"></i> Área do Aluno
-                </h2>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">
+                        <i class="fas fa-user-graduate"></i> Área do Aluno
+                    </h2>
+                    <button class="btn btn-metro" onclick="navigateTo('index.html')">
+                        <i class="fas fa-graduation-cap"></i> Ver Cursos Disponíveis
+                    </button>
+                </div>
 
                 <div class="row">
                     <!-- Dados do Aluno -->
@@ -65,7 +83,6 @@
                         <div class="card-custom">
                             <h3><i class="fas fa-user"></i> Meus Dados</h3>
                             <p><strong>Nome:</strong> João Silva</p>
-                            <p><strong>Matrícula:</strong> 123456</p>
                             <p><strong>RGM:</strong> 123.456.789-00</p>
                             <p><strong>Email:</strong> joao.silva@email.com</p>
                             <p><strong>Cargo:</strong> Técnico de Manutenção</p>
@@ -88,9 +105,7 @@
                                         </div>
                                         <p><strong>Turma:</strong> NR35-TURMA-0823</p>
                                         <p><strong>Próxima aula:</strong> 25/08/2023 - 14:00</p>
-                                        <button class="btn btn-metro w-100 mt-2">
-                                            <i class="fas fa-play-circle"></i> Continuar Curso
-                                        </button>
+                                        <p><strong>Progresso:</strong> 13 de 20 aulas concluídas</p>
                                     </div>
                                 </div>
 
@@ -104,53 +119,33 @@
                                         <button class="btn btn-metro w-100 mt-2" onclick="baixarCertificado()">
                                             <i class="fas fa-download"></i> Emitir Certificado
                                         </button>
+                                    </div>
+                                </div>
 
-                                        <script>
-                                            function baixarCertificado() {
-                                                const link = document.createElement('a');
-                                                link.href = 'Certificado.pdf'; // caminho do PDF
-                                                link.download = 'Certificado.pdf'; // nome do arquivo ao baixar
-                                                link.click();
-                                            }
-                                        </script>
+                                <!-- Curso adicional para demonstração -->
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-users"></i> Liderança e Gestão de Equipes</h4>
+                                        <p><strong>Status:</strong> Concluído</p>
+                                        <p><strong>Turma:</strong> LID-TURMA-0623</p>
+                                        <p><strong>Data de conclusão:</strong> 15/06/2023</p>
+                                        <p><strong>Nota:</strong> 8.5</p>
+                                        <button class="btn btn-metro w-100 mt-2" onclick="baixarCertificado()">
+                                            <i class="fas fa-download"></i> Emitir Certificado
+                                        </button>
+                                    </div>
+                                </div>
 
-                                        <script>
-                                            async function gerarCertificado() {
-                                                const nome = document.getElementById("nome").value;
-
-                                                // Carrega o PDF modelo ORIGINAL
-                                                const existingPdfBytes = await fetch("Certificado.pdf").then(res => res.arrayBuffer());
-                                                const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
-                                                const page = pdfDoc.getPage(0);
-
-                                                // Fonte padrão
-                                                const font = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
-
-                                                // Coordenadas do nome
-                                                const xNome = 200;
-                                                const yNome = 880;
-
-                                                page.drawText(nome, {
-                                                    x: xNome,
-                                                    y: yNome,
-                                                    size: 28,
-                                                    font: font,
-                                                    color: PDFLib.rgb(1, 1, 1)
-                                                });
-
-                                                // Gera o PDF final
-                                                const pdfBytes = await pdfDoc.save();
-
-                                                // Baixa automaticamente
-                                                const blob = new Blob([pdfBytes], { type: "application/pdf" });
-                                                const link = document.createElement("a");
-                                                link.href = URL.createObjectURL(blob);
-                                                link.download = "Certificado-Gerado.pdf";
-                                                link.click();
-                                            }
-                                        </script>
-
-
+                                <div class="col-md-6 mb-3">
+                                    <div class="card-custom h-100">
+                                        <h4><i class="fas fa-shield-alt"></i> NR33 - Espaços Confinados</h4>
+                                        <p><strong>Status:</strong> Em andamento (30% concluído)</p>
+                                        <div class="progress-bar-custom">
+                                            <div class="progress-custom" style="width: 30%"></div>
+                                        </div>
+                                        <p><strong>Turma:</strong> NR33-TURMA-0923</p>
+                                        <p><strong>Próxima aula:</strong> 02/09/2023 - 09:00</p>
+                                        <p><strong>Progresso:</strong> 6 de 20 aulas concluídas</p>
                                     </div>
                                 </div>
                             </div>
@@ -161,30 +156,64 @@
                 <!-- Certificados -->
                 <div class="row mt-4">
                     <div class="col-12">
-                        <h3 class="mb-3">
-                            <i class="fas fa-file-certificate"></i> Meus Certificados
-                        </h3>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="mb-0">
+                                <i class="fas fa-file-certificate"></i> Meus Certificados
+                            </h3>
+                            <span class="badge-metro badge-info">2 certificados</span>
+                        </div>
 
-                        <div class="certificado">
+                        <div class="certificado mb-4">
                             <h3>CERTIFICADO</h3>
                             <div class="certificado-content">
-                                <p>Certificamos que <strong>João Silva</strong>, matrícula <strong>123456</strong>,</p>
-                                <p>concluiu com êxito o curso de <strong>NR10 - Segurança em Instalações
-                                        Elétricas</strong>,</p>
-                                <p>com carga horária de <strong>60 horas</strong>, realizado em <strong>Julho de
-                                        2023</strong>.</p>
+                                <p>Certificamos que <strong>João Silva</strong>, RGM <strong>123.456.789-00</strong>,</p>
+                                <p>concluiu com êxito o curso de <strong>NR10 - Segurança em Instalações Elétricas</strong>,</p>
+                                <p>com carga horária de <strong>60 horas</strong>, realizado em <strong>Julho de 2023</strong>.</p>
+                                <p><strong>Nota final:</strong> 9.2</p>
                             </div>
                             <div class="certificado-footer">
                                 <div class="assinatura">
-                                    <p></p>
+                                    <p>_________________________</p>
                                     <p>Eng. Mariana Santos</p>
                                     <p>Instrutora</p>
                                 </div>
                                 <div class="assinatura">
-                                    <p></p>
+                                    <p>_________________________</p>
                                     <p>João Silva</p>
                                     <p>Aluno</p>
                                 </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-metro" onclick="baixarCertificado()">
+                                    <i class="fas fa-download"></i> Baixar Certificado
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="certificado">
+                            <h3>CERTIFICADO</h3>
+                            <div class="certificado-content">
+                                <p>Certificamos que <strong>João Silva</strong>, RGM <strong>123.456.789-00</strong>,</p>
+                                <p>concluiu com êxito o curso de <strong>Liderança e Gestão de Equipes</strong>,</p>
+                                <p>com carga horária de <strong>30 horas</strong>, realizado em <strong>Junho de 2023</strong>.</p>
+                                <p><strong>Nota final:</strong> 8.5</p>
+                            </div>
+                            <div class="certificado-footer">
+                                <div class="assinatura">
+                                    <p>_________________________</p>
+                                    <p>Dr. Roberto Almeida</p>
+                                    <p>Instrutor</p>
+                                </div>
+                                <div class="assinatura">
+                                    <p>_________________________</p>
+                                    <p>João Silva</p>
+                                    <p>Aluno</p>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-metro" onclick="baixarCertificado()">
+                                    <i class="fas fa-download"></i> Baixar Certificado
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -204,6 +233,61 @@
     </script>
     <!-- Embed Im: widget de acessibilidade -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
+
+    <script>
+        // Dados mockados do aluno
+        const aluno = {
+            nome: "João Silva",
+            rgm: "123.456.789-00",
+            email: "joao.silva@email.com",
+            cargo: "Técnico de Manutenção",
+            departamento: "Manutenção",
+            certificados: 2
+        };
+
+        function baixarCertificado() {
+            // Simulação de download de certificado
+            const link = document.createElement('a');
+            link.href = 'Certificado.pdf';
+            link.download = 'Certificado.pdf';
+            link.click();
+            
+            // Notificação de sucesso
+            if (typeof mostrarNotificacao === 'function') {
+                mostrarNotificacao('Certificado baixado com sucesso!', 'success');
+            } else {
+                alert('Certificado baixado com sucesso!');
+            }
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function alternarPapel(novoPapel) {
+            if (novoPapel === 'aluno') {
+                navigateTo('areaAluno.html');
+            } else if (novoPapel === 'instrutor') {
+                navigateTo('areaInstrutor.html');
+            }
+        }
+
+        // Atualizar dados do aluno na página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atualizar badge de certificados
+            const certificadosBadge = document.querySelector('.badge-info');
+            if (certificadosBadge) {
+                certificadosBadge.textContent = `${aluno.certificados} certificados`;
+            }
+
+            // Verificar se usuário tem múltiplos papéis (simulação)
+            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+            if (usuario && usuario.papeis && usuario.papeis.length > 1) {
+                document.getElementById('papelSelector').style.display = 'block';
+                document.getElementById('papelAtualTexto').textContent = 'Aluno';
+            }
+        });
+    </script>
 </body>
 
 </html>
