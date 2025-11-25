@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showLoading(this.querySelector('button'));
             
             setTimeout(() => {
-                if (user === 'admin' && password === 'admin123') {
+                if (user === 'evandroo@email.com' && password === '7654321') {
                     // Usuário admin tem múltiplos papéis
                     const usuario = {
                         nome: "Administrador",
